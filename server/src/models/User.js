@@ -10,7 +10,19 @@ async function createUser(username, password) {
 }
 
 async function findByUsername(username) {
-  return pool.query("SELECT * FROM users WHERE username = $1", username);
+  try {
+    const user = await pool.query("SELECT * FROM users WHERE username = $1", [
+      username,
+    ]);
+
+    if (user.rows.length === 0) {
+      return null;
+    }
+
+    return user.rows[0];
+  } catch (error) {
+    throw error;
+  }
 }
 
 module.exports = { createUser, findByUsername };

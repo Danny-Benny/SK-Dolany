@@ -3,6 +3,7 @@ const passport = require("../utils/passport");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 const { createUser } = require("../models/User");
+const secretKey = "abc";
 
 router.post("/register", async (req, res) => {
   try {
@@ -18,7 +19,11 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", { session: false }, (err, user) => {
-    if (err || !user) {
+    console.log(err, user);
+    if (err) {
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+    if (!user) {
       return res.status(401).json({ message: "Authentication failed" });
     }
 
@@ -27,8 +32,8 @@ router.post("/login", (req, res, next) => {
         res.send(err);
       }
 
-      const token = jwt.sign({ id: user.id }, "abc");
-      return res.json(token.rows[0]);
+      const token = jwt.sign({ id: user.id }, secretKey);
+      return res.json({ token });
     });
   })(req, res, next);
 });
