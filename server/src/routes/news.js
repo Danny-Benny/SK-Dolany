@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 
+//post a new
 router.post("/news", async (req, res) => {
   try {
     const { title, content } = req.body;
