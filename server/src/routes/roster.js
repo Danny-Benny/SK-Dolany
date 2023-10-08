@@ -31,10 +31,9 @@ router.get("/roster", async (req, res) => {
 router.get("/roster/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const newPlayer = await pool.query(
-      "SELECT * FROM roster WHERE player_id = $1",
-      [id]
-    );
+    const newPlayer = await pool.query("SELECT * FROM roster WHERE id = $1", [
+      id,
+    ]);
     res.json(newPlayer.rows[0]);
   } catch (err) {
     console.error(err.message);
@@ -48,7 +47,7 @@ router.put("/roster/:id", async (req, res) => {
     const { player_name, player_position, jersey_number, player_photo_url } =
       req.body;
     const updatePlayer = await pool.query(
-      "UPDATE roster SET player_name = $1, player_position = $2, jersey_number = $3, player_photo_url = $4 WHERE player_id = $5",
+      "UPDATE roster SET player_name = $1, player_position = $2, jersey_number = $3, player_photo_url = $4 WHERE id = $5",
       [player_name, player_position, jersey_number, player_photo_url, id]
     );
     res.json(updatePlayer.rows[0]);
@@ -61,10 +60,9 @@ router.put("/roster/:id", async (req, res) => {
 router.delete("/roster/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deletePlayer = await pool.query(
-      "DELETE FROM roster WHERE player_id = $1",
-      [id]
-    );
+    const deletePlayer = await pool.query("DELETE FROM roster WHERE id = $1", [
+      id,
+    ]);
     res.json("Player was deleted!");
   } catch (err) {
     console.error(err.message);

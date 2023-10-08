@@ -2,7 +2,7 @@
 
 # dependencies
 node_modules
-/server/src/db.js
+.db.js
 /.pnp
 .pnp.js
 

@@ -30,9 +30,7 @@ router.get("/news", async (req, res) => {
 router.get("/news/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const newNews = await pool.query("SELECT * FROM news WHERE news_id = $1", [
-      id,
-    ]);
+    const newNews = await pool.query("SELECT * FROM news WHERE id = $1", [id]);
     res.json(newNews.rows[0]);
   } catch (err) {
     console.error(err.message);
@@ -45,7 +43,7 @@ router.put("/news/:id", async (req, res) => {
     const { id } = req.params;
     const { title, content } = req.body;
     const updateNews = await pool.query(
-      "UPDATE news SET title = $1, content = $2 WHERE news_id = $3",
+      "UPDATE news SET title = $1, content = $2 WHERE id = $3",
       [title, content, id]
     );
     res.json(updateNews.rows[0]);
@@ -58,9 +56,7 @@ router.put("/news/:id", async (req, res) => {
 router.delete("/news/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteNews = await pool.query("DELETE FROM news WHERE news_id = $1", [
-      id,
-    ]);
+    const deleteNews = await pool.query("DELETE FROM news WHERE id = $1", [id]);
     res.json(deleteNews.rows[0]);
   } catch (err) {
     console.error(err.message);
