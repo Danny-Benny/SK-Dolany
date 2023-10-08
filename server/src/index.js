@@ -11,6 +11,7 @@ app.use("/auth", require("./routes/auth"));
 app.use("/protected", require("./routes/protected"));
 app.use("/news", require("./routes/news"));
 app.use("/roster", require("./routes/roster"));
+app.use("/discussion", require("./routes/discussion"));
 
 app.listen(5000, () => {
   console.log("server started on port 5000");

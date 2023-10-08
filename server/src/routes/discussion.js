@@ -5,11 +5,12 @@ const pool = require("../db");
 //post a discussion
 router.post("/discussions", async (req, res) => {
   try {
-    const { disscussion_title } = req.body;
+    const { discussion_title } = req.body;
     const newDisscussion = await pool.query(
-      "INSERT INTO discussion (disscussion_title) VALUES($1) RETURNING *",
-      [disscussion_title]
+      "INSERT INTO discussion (discussion_title) VALUES($1) RETURNING *",
+      [discussion_title]
     );
+    res.json(newDisscussion.rows[0]);
   } catch (err) {
     console.error(err.message);
   }
@@ -19,7 +20,7 @@ router.post("/discussions", async (req, res) => {
 router.get("/discussions", async (req, res) => {
   try {
     const allDiscussions = await pool.query("SELECT * FROM discussion");
-    res.json(allDiscussions.rows);
+    res.json(allDiscussions.rows[0]);
   } catch (err) {
     console.error(err.message);
   }
@@ -43,10 +44,10 @@ router.get("/discussions/:id", async (req, res) => {
 router.put("/discussions/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { disscussion_title } = req.body;
+    const { discussion_title } = req.body;
     const updateDisscussion = await pool.query(
-      "UPDATE discussion SET disscussion_title = $1 WHERE id = $2",
-      [disscussion_title, id]
+      "UPDATE discussion SET discussion_title = $1 WHERE id = $2",
+      [discussion_title, id]
     );
     res.json(updateDisscussion.rows[0]);
   } catch (err) {
@@ -67,3 +68,5 @@ router.delete("/discussions/:id", async (req, res) => {
     console.error(err.message);
   }
 });
+
+module.exports = router;
