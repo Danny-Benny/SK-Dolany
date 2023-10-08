@@ -20,7 +20,7 @@ router.post("/discussions", async (req, res) => {
 router.get("/discussions", async (req, res) => {
   try {
     const allDiscussions = await pool.query("SELECT * FROM discussion");
-    res.json(allDiscussions.rows[0]);
+    res.json(allDiscussions.rows);
   } catch (err) {
     console.error(err.message);
   }
