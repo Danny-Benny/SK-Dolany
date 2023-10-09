@@ -15,6 +15,7 @@ app.use("/discussions", require("./routes/discussions"));
 app.use("/discussions_posts", require("./routes/discussions_posts"));
 app.use("/seasons_links", require("./routes/seasons_links"));
 app.use("/sponsors", require("./routes/sponsors"));
+app.use("/photos", require("./routes/photos"));
 
 app.listen(5000, () => {
   console.log("server started on port 5000");
