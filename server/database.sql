@@ -34,3 +34,9 @@ CREATE TABLE discussion_posts (
     author_id INT REFERENCES users(id),
     discussion_id INT REFERENCES discussion(id)
 );
+
+CREATE TABLE season_links (
+    id SERIAL PRIMARY KEY,
+    season_name VARCHAR(255) NOT NULL,
+    link_url TEXT
+);
