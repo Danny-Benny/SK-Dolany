@@ -1,5 +1,6 @@
+/* Home.tsx */
+
 import React, { useState, useEffect } from "react";
-import { CSSTransition } from "react-transition-group";
 import "./Home.css";
 
 const images = [
@@ -12,34 +13,32 @@ const Home = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
+    const nextImage = (activeIndex + 1) % images.length;
+
     const interval = setInterval(() => {
-      setActiveIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3000);
+      setActiveIndex(nextImage);
+    }, 5000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [activeIndex]);
 
   return (
     <div className="slideshow-container">
       {images.map((image, index) => (
-        <CSSTransition
+        <img
           key={index}
-          in={index === activeIndex}
-          timeout={500}
-          classNames="fade"
-          unmountOnExit
-        >
-          <img src={image} alt={`Slideshow ${index}`} />
-        </CSSTransition>
+          src={image}
+          alt={`Slideshow ${index + 1}`}
+          className={`slideshow-image ${index === activeIndex ? "active" : ""}`}
+        />
       ))}
       <div className="dots-container">
         {images.map((_, index) => (
-          <span
+          <button
             key={index}
-            className={`dot ${index === activeIndex ? "active" : ""}`}
             onClick={() => setActiveIndex(index)}
-          ></span>
+            className={`dot ${index === activeIndex ? "active" : ""}`}
+          />
         ))}
       </div>
     </div>

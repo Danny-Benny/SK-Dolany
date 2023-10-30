@@ -1,47 +1,44 @@
-/* Styles for the slideshow container */
 .slideshow-container {
-  position: relative;
   width: 100%;
-  max-width: auto; /* Adjust the max width as needed */
-  margin: 0 auto;
+  height: 100vh;
   overflow: hidden;
+  position: relative;
 }
 
-.slideshow-container img {
+.slideshow-image {
   width: 100%;
-  display: none;
-  animation: fade 1s ease-in-out;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  transition: left 0.5s;
 }
 
-/* CSS for fading in images */
-@keyframes fade {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.slideshow-image.active {
+  left: 0;
 }
 
-/* Styles for the navigation dots container */
-.dot-container {
+.dots-container {
   text-align: center;
-  padding: 20px 0;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 
-/* Styles for navigation dots */
 .dot {
   display: inline-block;
   width: 10px;
   height: 10px;
   margin: 0 5px;
-  background-color: #bbb;
+  background-color: #ccc;
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-/* Style for the active dot */
 .dot.active {
   background-color: #717171;
 }
