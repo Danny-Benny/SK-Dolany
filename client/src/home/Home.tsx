@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import "./Home.css";
+import React from "react";
+import Slideshow from "./components/slideshow";
 
 const images = [
   "./assets/slideshow1.jpeg",
@@ -8,37 +8,9 @@ const images = [
 ];
 
 const Home = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const nextImage = (activeIndex + 1) % images.length;
-
-    const interval = setInterval(() => {
-      setActiveIndex(nextImage);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [activeIndex]);
-
   return (
-    <div className="slideshow-container">
-      {images.map((image, index) => (
-        <img
-          key={index}
-          src={image}
-          alt={`Slideshow ${index + 1}`}
-          className={`slideshow-image ${index === activeIndex ? "active" : ""}`}
-        />
-      ))}
-      <div className="dots-container">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setActiveIndex(index)}
-            className={`dot ${index === activeIndex ? "active" : ""}`}
-          />
-        ))}
-      </div>
+    <div>
+      <Slideshow images={images} title1="SK Dolany" title2="fotbalový tým" />
     </div>
   );
 };
