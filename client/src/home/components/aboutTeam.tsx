@@ -7,8 +7,12 @@ const AboutTeam = (props: AboutProps) => {
   }`;
 
   return (
-    <div className={`bg-white rounded-lg shadow-md p-6 ${squareSize}`}>
-      <h2 className="text-2xl font-bold mb-4">{props.titleAbout}</h2>
+    <div
+      className={`bg-white rounded-lg shadow-md p-6 ${squareSize} flex flex-col items-center`}
+    >
+      <h2 className="text-2xl font-bold mb-4 text-center text-mygreen">
+        {props.titleAbout}
+      </h2>
       <p className="text-gray-700">{props.paragraphAbout}</p>
     </div>
   );

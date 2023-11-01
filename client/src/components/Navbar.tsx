@@ -11,7 +11,7 @@ const images = [
 export const Navbar = () => {
   return (
     <>
-      <nav className="bg-green-800 relative pb-5 pt-5 w-full z-10">
+      <nav className="bg-mygreen relative pb-5 pt-5 w-full z-10">
         <div className="flex justify-between items-center px-4">
           <Link
             to="/"
@@ -19,7 +19,7 @@ export const Navbar = () => {
           >
             <img src="./assets/logo.png" alt="" className="relative -mt-4" />
           </Link>
-          <ul className="flex text-white ml-auto relative -mr-4">
+          <ul className="flex ml-auto relative -mr-4 text-white">
             <li className="p-2">
               <Link to="/roster">Soupiska týmu</Link>
             </li>
