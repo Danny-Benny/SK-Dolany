@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./slideshow.css";
-import { SlideshowProps } from "./types";
+import { SlideshowProps } from "../home/components/types";
 
 const Slideshow = ({ images, title1, title2 }: SlideshowProps) => {
   const [activeIndex, setActiveIndex] = useState(0);

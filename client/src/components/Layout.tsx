@@ -7,10 +7,10 @@ type Props = {
 
 const Layout: React.FC<Props> = ({ children }) => {
   return (
-    <div>
+    <>
       <Navbar />
-      {children}
-    </div>
+      <div className="mx-12">{children}</div>
+    </>
   );
 };
 

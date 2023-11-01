@@ -4,8 +4,7 @@ export interface SlideshowProps {
   title2: string;
 }
 
-export interface MainPartProps {
-  images: string[];
+export interface AboutProps {
   titleAbout: string;
   paragraphAbout: string;
 }
