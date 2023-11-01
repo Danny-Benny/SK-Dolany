@@ -8,3 +8,7 @@ export interface AboutProps {
   titleAbout: string;
   paragraphAbout: string;
 }
+
+export interface AlonePictureProps {
+  image: string;
+}

@@ -23,7 +23,6 @@ const Slideshow = ({ images, title1, title2 }: SlideshowProps) => {
           className={`slideshow-image ${index === activeIndex ? "active" : ""}`}
           style={{ backgroundImage: `url(${image})` }}
         >
-          {/* Add a div for the black overlay within each image container */}
           <div className="slideshow-overlay"></div>
         </div>
       ))}
