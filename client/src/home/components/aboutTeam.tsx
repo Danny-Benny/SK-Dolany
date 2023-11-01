@@ -2,14 +2,8 @@ import React from "react";
 import { AboutProps } from "./types";
 
 const AboutTeam = (props: AboutProps) => {
-  const squareSize = `w-${props.paragraphAbout.length * 2} h-${
-    props.paragraphAbout.length * 2
-  }`;
-
   return (
-    <div
-      className={`bg-white rounded-lg shadow-md p-6 ${squareSize} flex flex-col items-center`}
-    >
+    <div className="bg-white rounded-lg shadow-xl p-6 flex flex-col items-center">
       <h2 className="text-2xl font-bold mb-4 text-center text-mygreen">
         {props.titleAbout}
       </h2>
