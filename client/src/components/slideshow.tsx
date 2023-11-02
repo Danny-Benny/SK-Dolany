@@ -26,15 +26,6 @@ const Slideshow = ({ images, title1, title2 }: SlideshowProps) => {
           <div className="slideshow-overlay"></div>
         </div>
       ))}
-      <div className="dots-container">
-        {images.map((_: any, index: number) => (
-          <button
-            key={index}
-            onClick={() => setActiveIndex(index)}
-            className={`dot ${index === activeIndex ? "active" : ""}`}
-          />
-        ))}
-      </div>
       <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center z-10">
         <h1 className="text-8xl text-white font-bold">{title1}</h1>
         <h2 className="text-2xl text-white font-bold">{title2}</h2>

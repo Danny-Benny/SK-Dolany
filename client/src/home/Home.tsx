@@ -4,7 +4,7 @@ import AlonePicture from "./components/alonePicture";
 
 const Home = () => {
   return (
-    <div className="pt-20 pb-20 flex">
+    <div className="pt-6 pb-6 flex">
       <div className="flex-1 pr-6">
         <AboutTeam
           titleAbout={"Historie klubu SK Dolany"}
