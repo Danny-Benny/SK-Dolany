@@ -3,7 +3,7 @@ import { AboutProps } from "./types";
 
 const AboutTeam = (props: AboutProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-xl p-6 flex flex-col items-center">
+    <div className="bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center">
       <h2 className="text-2xl font-bold mb-4 text-center text-mygreen">
         {props.titleAbout}
       </h2>
