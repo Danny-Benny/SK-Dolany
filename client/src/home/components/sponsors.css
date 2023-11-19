@@ -8,5 +8,5 @@
 }
 
 .animate-slide {
-  animation: slide 5s linear infinite; /* Adjust the duration as needed */
+  animation: slide 12s linear infinite; /* Adjust the duration as needed */
 }

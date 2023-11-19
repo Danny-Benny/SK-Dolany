@@ -12,3 +12,13 @@ export interface AboutProps {
 export interface AlonePictureProps {
   image: string;
 }
+
+export interface SponsorPictureProps {
+  image: string;
+}
+
+export interface ImageSize {
+  src: string;
+  width: number;
+  height: number;
+}
