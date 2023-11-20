@@ -21,7 +21,10 @@ const Home = () => {
             <AlonePicture image={"./assets/alone1.jpg"} />
           </div>
         </div>
-        <div className="flex mt-6">
+      </div>
+
+      <div className="pt-6 pb-6 mt-6 bg-white rounded-2xl shadow-xl">
+        <div className="flex">
           <div className="pl-6">
             <AlonePicture image={"./assets/alone2.jpeg"} />
           </div>
@@ -31,6 +34,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+
       <Sponsors />
     </>
   );

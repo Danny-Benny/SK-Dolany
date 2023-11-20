@@ -1,12 +1,11 @@
 @keyframes slide {
   0% {
-    transform: translateX(100%);
+    transform: translateX(0);
   }
   100% {
     transform: translateX(-100%);
   }
 }
-
 .animate-slide {
-  animation: slide 12s linear infinite; /* Adjust the duration as needed */
+  animation: slide 16s linear infinite; /* Adjust the duration as needed */
 }

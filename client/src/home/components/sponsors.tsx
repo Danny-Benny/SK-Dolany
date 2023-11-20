@@ -16,7 +16,7 @@ const Sponsors = () => {
   useEffect(() => {
     const fetchImageSizes = async () => {
       const sizes = await Promise.all(
-        sponsorImages.map((image) => getImageSize(image))
+        [...sponsorImages, ...sponsorImages].map((image) => getImageSize(image))
       );
       setImageSizes(sizes);
     };
@@ -51,6 +51,7 @@ const Sponsors = () => {
               maxWidth: "100%", // Ensure the image doesn't exceed its natural size
               maxHeight: "100%", // Ensure the image doesn't exceed its natural size
             }}
+            className="m-6"
           />
         ))}
       </div>
