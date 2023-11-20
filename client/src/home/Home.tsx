@@ -3,6 +3,22 @@ import AboutTeam from "./components/aboutTeam";
 import AlonePicture from "./components/alonePicture";
 import Calendar from "./components/calendar";
 import Sponsors from "./components/sponsors";
+import News from "./components/news";
+
+const news = [
+  {
+    id: 0,
+    titleNews: "Novinky 1",
+    contentNews:
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas aliquet accumsan leo.",
+  },
+  {
+    id: 1,
+    titleNews: "Novinky 2",
+    contentNews:
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas aliquet accumsan leo.",
+  },
+];
 
 const Home = () => {
   return (
@@ -22,7 +38,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
       <div className="pt-6 pb-6 mt-6 bg-white rounded-2xl shadow-xl">
         <div className="flex">
           <div className="pl-6">
@@ -33,6 +48,15 @@ const Home = () => {
             <Calendar />
           </div>
         </div>
+      </div>
+      <div className="pt-6 pb-6 mt-6 bg-white rounded-2xl shadow-xl">
+        {news.map((item) => (
+          <News
+            id={item.id}
+            titleNews={item.titleNews}
+            contentNews={item.contentNews}
+          />
+        ))}
       </div>
 
       <Sponsors />

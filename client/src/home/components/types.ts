@@ -17,8 +17,8 @@ export interface SponsorPictureProps {
   image: string;
 }
 
-export interface ImageSize {
-  src: string;
-  width: number;
-  height: number;
+export interface NewsProps {
+  id: number;
+  titleNews: string;
+  contentNews: string;
 }
