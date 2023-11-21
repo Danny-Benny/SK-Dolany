@@ -11,12 +11,28 @@ const news = [
     titleNews: "Novinky 1",
     contentNews:
       "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas aliquet accumsan leo.",
+    dateNews: "2021-05-05",
   },
   {
     id: 1,
     titleNews: "Novinky 2",
     contentNews:
       "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas aliquet accumsan leo.",
+    dateNews: "2021-05-05",
+  },
+  {
+    id: 0,
+    titleNews: "Novinky 3",
+    contentNews:
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas aliquet accumsan leo.",
+    dateNews: "2021-05-05",
+  },
+  {
+    id: 1,
+    titleNews: "Novinky 4",
+    contentNews:
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas aliquet accumsan leo.",
+    dateNews: "2021-05-05",
   },
 ];
 
@@ -49,12 +65,17 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="pt-6 pb-6 mt-6 bg-white rounded-2xl shadow-xl">
+      <div className="pt-6 pb-6 mt-6 bg-white shadow-xl flex flex-wrap">
+        <h2 className="w-full text-center text-2xl text-mygreen font-bold">
+          Novinky
+        </h2>
         {news.map((item) => (
           <News
+            key={item.id}
             id={item.id}
             titleNews={item.titleNews}
             contentNews={item.contentNews}
+            dateNews={item.dateNews}
           />
         ))}
       </div>

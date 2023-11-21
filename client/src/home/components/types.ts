@@ -21,4 +21,5 @@ export interface NewsProps {
   id: number;
   titleNews: string;
   contentNews: string;
+  dateNews: string;
 }
