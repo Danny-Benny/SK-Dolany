@@ -32,7 +32,6 @@ const Sponsors = () => {
       };
       img.src = src;
 
-      // In case the image fails to load, resolve with 0 width and height
       img.onerror = () => resolve({ src, width: 0, height: 0 });
     });
   };
@@ -46,10 +45,10 @@ const Sponsors = () => {
             src={src}
             alt={`Sponsor ${index + 1}`}
             style={{
-              width: "auto", // Set your desired width
-              height: "80px", // Maintain the aspect ratio
-              maxWidth: "100%", // Ensure the image doesn't exceed its natural size
-              maxHeight: "100%", // Ensure the image doesn't exceed its natural size
+              width: "auto",
+              height: "80px",
+              maxWidth: "100%",
+              maxHeight: "100%",
             }}
             className="m-6"
           />

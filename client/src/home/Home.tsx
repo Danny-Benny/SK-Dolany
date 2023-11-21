@@ -65,7 +65,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="pt-6 pb-6 mt-6 bg-white shadow-xl flex flex-wrap">
+      <div className="pt-6 pb-6 mt-6 bg-white shadow-xl flex flex-wrap rounded-2xl justify-center items-center">
         <h2 className="w-full text-center text-2xl text-mygreen font-bold">
           Novinky
         </h2>
