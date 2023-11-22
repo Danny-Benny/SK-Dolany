@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Slideshow from "./slideshow";
 
 const images = [
@@ -9,6 +9,8 @@ const images = [
 ];
 
 export const Navbar = () => {
+  const location = useLocation();
+
   return (
     <>
       <nav className="bg-mygreen relative pb-5 pt-5 w-full z-10">
@@ -35,7 +37,9 @@ export const Navbar = () => {
           </ul>
         </div>
       </nav>
-      <Slideshow images={images} title1="SK Dolany" title2="fotbalový tým" />
+      {location.pathname === "/" && (
+        <Slideshow images={images} title1="SK Dolany" title2="fotbalový tým" />
+      )}
     </>
   );
 };
