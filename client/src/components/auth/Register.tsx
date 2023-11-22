@@ -3,12 +3,20 @@ import React, { useState } from "react";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordAgain, setPasswordAgain] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to manage visibility of password
+  const [showPasswordAgain, setShowPasswordAgain] = useState(false); // State to manage visibility of passwordAgain
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
 
   const handleRegister = async () => {
     try {
+      if (password !== passwordAgain) {
+        console.error("Passwords do not match");
+        return;
+      }
+
       const response = await fetch("http://localhost:5000/auth/register", {
         method: "POST",
         headers: {
@@ -25,10 +33,9 @@ const Register = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data); // handle success
+        console.log(data);
       } else {
         console.error("Failed to register. Status:", response.status);
-        // You can handle error scenarios here
       }
     } catch (error) {
       console.error("Error registering:", error);
@@ -68,20 +75,40 @@ const Register = () => {
             onChange={(e) => setUsername(e.target.value)}
             className="p-2 border rounded w-full mb-2"
           />
-          <input
-            type="password"
-            placeholder="Heslo"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="p-2 border rounded w-full mb-2"
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Heslo"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="p-2 border rounded w-full mb-2"
+            />
+            <button
+              className="absolute top-0 right-0 mt-2 mr-2"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
+          <div className="relative">
+            <input
+              type={showPasswordAgain ? "text" : "password"}
+              placeholder="Heslo znovu"
+              value={passwordAgain}
+              onChange={(e) => setPasswordAgain(e.target.value)}
+              className="p-2 border rounded w-full mb-2"
+            />
+            <button
+              className="absolute top-0 right-0 mt-2 mr-2"
+              onClick={() => setShowPasswordAgain(!showPasswordAgain)}
+            >
+              {showPasswordAgain ? "Hide" : "Show"}
+            </button>
+          </div>
           <div className="flex justify-between">
             {/* Empty div for spacing */}
             <div></div>
-            <button
-              onClick={handleRegister}
-              className=" text-black p-2 rounded"
-            >
+            <button onClick={handleRegister} className="text-black p-2 rounded">
               Registrace
             </button>
           </div>
