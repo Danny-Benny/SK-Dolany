@@ -7,8 +7,17 @@ const secretKey = "abc";
 
 router.post("/register", async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await createUser(username, password);
+    const { username, password, name, surname, email, role } = req.body;
+    const userRole = role || "public";
+    const user = await createUser(
+      username,
+      password,
+      name,
+      surname,
+      email,
+      userRole
+    );
+
     res.json(user.rows[0]);
   } catch (err) {
     res

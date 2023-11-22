@@ -3,6 +3,9 @@ import React, { useState } from "react";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleRegister = async () => {
     try {
@@ -11,7 +14,13 @@ const Register = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({
+          username,
+          password,
+          name,
+          surname,
+          email,
+        }),
       });
 
       if (response.ok) {
@@ -34,6 +43,27 @@ const Register = () => {
           <input
             type="text"
             placeholder="Jméno"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="p-2 border rounded w-full mb-2"
+          />
+          <input
+            type="text"
+            placeholder="Příjmení"
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
+            className="p-2 border rounded w-full mb-2"
+          />
+          <input
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="p-2 border rounded w-full mb-2"
+          />
+          <input
+            type="text"
+            placeholder="Uživatelské jméno"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="p-2 border rounded w-full mb-2"
