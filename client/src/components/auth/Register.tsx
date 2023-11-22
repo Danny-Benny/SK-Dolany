@@ -27,28 +27,36 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-6">
-      <h2 className="text-2xl font-bold mb-4">Register</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="p-2 border rounded w-full mb-2"
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="p-2 border rounded w-full mb-2"
-      />
-      <button
-        onClick={handleRegister}
-        className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
-      >
-        Register
-      </button>
+    <div className="flex items-center justify-center h-screen">
+      <div className="bg-gray-100 p-6 text-center">
+        <div className="bg-white p-4 rounded-2xl shadow-xl">
+          <h2 className="text-2xl font-bold mb-4">Registrace</h2>
+          <input
+            type="text"
+            placeholder="Jméno"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="p-2 border rounded w-full mb-2"
+          />
+          <input
+            type="password"
+            placeholder="Heslo"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="p-2 border rounded w-full mb-2"
+          />
+          <div className="flex justify-between">
+            {/* Empty div for spacing */}
+            <div></div>
+            <button
+              onClick={handleRegister}
+              className=" text-black p-2 rounded"
+            >
+              Registrace
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

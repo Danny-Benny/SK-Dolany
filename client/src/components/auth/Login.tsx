@@ -18,13 +18,9 @@ const Login = () => {
         const data = await response.json();
         console.log("Received data:", data);
 
-        // Check if the token is present in the response
         if (data.token) {
-          // Save the token in local storage
           localStorage.setItem("token", data.token);
           console.log("Token stored in local storage:", data.token);
-
-          // For debugging purposes, log all items in local storage
           console.log("All items in local storage:", localStorage);
         } else {
           console.error("Token not found in the response");
@@ -38,28 +34,32 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-6">
-      <h2 className="text-2xl font-bold mb-4">Login</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="p-2 border rounded w-full mb-2"
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="p-2 border rounded w-full mb-2"
-      />
-      <button
-        onClick={handleLogin}
-        className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
-      >
-        Login
-      </button>
+    <div className="flex items-center justify-center h-screen">
+      <div className="bg-gray-100 p-6 text-center">
+        <div className="bg-white p-4 rounded-2xl shadow-xl">
+          <h2 className="text-2xl font-bold mb-4">Login</h2>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="p-2 border rounded w-full mb-2"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="p-2 border rounded w-full mb-2"
+          />
+          <div className="flex justify-between">
+            <div></div>
+            <button onClick={handleLogin} className=" text-black p-2 rounded">
+              Login
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
