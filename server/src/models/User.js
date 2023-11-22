@@ -1,11 +1,11 @@
 const pool = require("../db");
 const bcrypt = require("bcrypt");
 
-async function createUser(username, password) {
+async function createUser(username, password, name, surname, email, role) {
   const hashedPassword = await bcrypt.hash(password, 10);
   return pool.query(
-    "INSERT INTO users(username, password) VALUES($1, $2) RETURNING id",
-    [username, hashedPassword]
+    "INSERT INTO users(username, password, name, surname, email, role) VALUES($1, $2, $3, $4, $5, $6) RETURNING id",
+    [username, hashedPassword, name, surname, email, role]
   );
 }
 
