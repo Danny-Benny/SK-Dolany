@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const passport = require("passport");
 
 //middleware
 app.use(cors());
+app.use(passport.initialize());
 app.use(express.json()); //req.body
 
 //ROUTES//
@@ -17,6 +19,8 @@ app.use("/seasons_links", require("./routes/seasons_links"));
 app.use("/sponsors", require("./routes/sponsors"));
 app.use("/photos", require("./routes/photos"));
 
-app.listen(5000, () => {
-  console.log("server started on port 5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

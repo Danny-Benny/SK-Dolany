@@ -25,4 +25,18 @@ async function findByUsername(username) {
   }
 }
 
-module.exports = { createUser, findByUsername };
+async function findById(id) {
+  try {
+    const user = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+
+    if (user.rows.length === 0) {
+      return null;
+    }
+
+    return user.rows[0];
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = { createUser, findByUsername, findById };

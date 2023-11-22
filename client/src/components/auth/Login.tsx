@@ -16,7 +16,19 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        console.log("Received data:", data);
+
+        // Check if the token is present in the response
+        if (data.token) {
+          // Save the token in local storage
+          localStorage.setItem("token", data.token);
+          console.log("Token stored in local storage:", data.token);
+
+          // For debugging purposes, log all items in local storage
+          console.log("All items in local storage:", localStorage);
+        } else {
+          console.error("Token not found in the response");
+        }
       } else {
         console.error("Failed to login. Status:", response.status);
       }

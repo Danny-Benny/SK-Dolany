@@ -19,7 +19,6 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", { session: false }, (err, user) => {
-    console.log(err, user);
     if (err) {
       return res.status(500).json({ message: "Internal Server Error" });
     }
@@ -33,7 +32,7 @@ router.post("/login", (req, res, next) => {
       }
 
       const token = jwt.sign({ id: user.id }, secretKey);
-      return res.json({ token });
+      res.json({ token });
     });
   })(req, res, next);
 });
