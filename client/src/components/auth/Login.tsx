@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,6 +20,8 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Received data:", data);
+        console.log(data);
+        navigate("/profile");
 
         if (data.token) {
           localStorage.setItem("token", data.token);
@@ -40,14 +45,14 @@ const Login = () => {
           <h2 className="text-2xl font-bold mb-4">Login</h2>
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Uživatelské jméno"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="p-2 border rounded w-full mb-2"
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Heslo"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="p-2 border rounded w-full mb-2"

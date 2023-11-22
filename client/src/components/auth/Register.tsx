@@ -1,21 +1,28 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // State to manage visibility of password
-  const [showPasswordAgain, setShowPasswordAgain] = useState(false); // State to manage visibility of passwordAgain
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordAgain, setShowPasswordAgain] = useState(false);
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
 
   const handleRegister = async () => {
     try {
       if (password !== passwordAgain) {
         console.error("Passwords do not match");
+        setPasswordsMatch(false);
         return;
       }
+
+      setPasswordsMatch(true);
 
       const response = await fetch("http://localhost:5000/auth/register", {
         method: "POST",
@@ -34,6 +41,7 @@ const Register = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
+        navigate("/profile");
       } else {
         console.error("Failed to register. Status:", response.status);
       }
@@ -105,8 +113,12 @@ const Register = () => {
               {showPasswordAgain ? "Hide" : "Show"}
             </button>
           </div>
+          {!passwordsMatch && (
+            <p className="text-red-500 text-left">
+              Hesla nejsou shodná. Zadejte stejná hesla.
+            </p>
+          )}
           <div className="flex justify-between">
-            {/* Empty div for spacing */}
             <div></div>
             <button onClick={handleRegister} className="text-black p-2 rounded">
               Registrace
