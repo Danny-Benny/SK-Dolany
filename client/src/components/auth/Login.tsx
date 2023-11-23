@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="bg-gray-100 p-6 text-center">
-        <div className="bg-white p-4 rounded-2xl shadow-xl">
+        <div className="bg-white p-4 rounded-2xl shadow-xl max-w-xl">
           <h2 className="text-2xl font-bold mb-4">Login</h2>
           <input
             type="text"
@@ -58,6 +58,12 @@ const Login = () => {
             className="p-2 border rounded w-full mb-2"
           />
           <div className="flex justify-between">
+            <button
+              onClick={() => navigate("/register")}
+              className="text-black p-2 rounded"
+            >
+              Ještě nemáte účet?
+            </button>
             <div></div>
             <button onClick={handleLogin} className=" text-black p-2 rounded">
               Login

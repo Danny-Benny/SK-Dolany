@@ -53,7 +53,7 @@ const Register = () => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="bg-gray-100 p-6 text-center">
-        <div className="bg-white p-4 rounded-2xl shadow-xl">
+        <div className="bg-white p-4 rounded-2xl shadow-xl max-w-xl">
           <h2 className="text-2xl font-bold mb-4">Registrace</h2>
           <input
             type="text"
@@ -119,6 +119,12 @@ const Register = () => {
             </p>
           )}
           <div className="flex justify-between">
+            <button
+              onClick={() => navigate("/login")}
+              className="text-black p-2 rounded"
+            >
+              Už mám účet
+            </button>
             <div></div>
             <button onClick={handleRegister} className="text-black p-2 rounded">
               Registrace
