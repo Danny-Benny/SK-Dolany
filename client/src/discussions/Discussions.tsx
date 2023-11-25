@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const Discussions = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, userRole } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
@@ -33,10 +33,10 @@ const Discussions = () => {
 
   return (
     <div>
-      <DiscussionsSelector title={"Verejnost"} />
-      <DiscussionsSelector title={"Občané dolan"} />
-      <DiscussionsSelector title={"Hráči SK"} />
-      <DiscussionsSelector title={"Výbor SK"} />
+      {userRole === "public" && <DiscussionsSelector title={"Verejnost"} />}
+      {userRole === "citizen" && <DiscussionsSelector title={"Občané dolan"} />}
+      {userRole === "player" && <DiscussionsSelector title={"Hráči SK"} />}
+      {userRole === "management" && <DiscussionsSelector title={"Výbor SK"} />}
     </div>
   );
 };

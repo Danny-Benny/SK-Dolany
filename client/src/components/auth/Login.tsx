@@ -25,6 +25,7 @@ const Login = () => {
 
         if (data.token) {
           localStorage.setItem("token", data.token);
+          localStorage.setItem("userRole", data.user.role);
           console.log("Token stored in local storage:", data.token);
           console.log("All items in local storage:", localStorage);
         } else {

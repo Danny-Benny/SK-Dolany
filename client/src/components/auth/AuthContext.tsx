@@ -2,6 +2,7 @@ import React, { createContext, useContext, ReactNode } from "react";
 
 interface AuthContextProps {
   isAuthenticated: () => boolean;
+  userRole: string | null;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -16,8 +17,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return token !== null && token !== undefined;
   };
 
+  const getUserRole = () => {
+    return localStorage.getItem("userRole");
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated }}>
+    <AuthContext.Provider value={{ isAuthenticated, userRole: getUserRole() }}>
       {children}
     </AuthContext.Provider>
   );
