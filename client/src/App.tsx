@@ -6,7 +6,7 @@ import Home from "./home/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Profile from "./components/auth/Profile";
-import AnyComponent from "./components/test";
+import Discussions from "./discussions/Discussions";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/test" element={<AnyComponent />} />
+          <Route path="/discussions" element={<Discussions />} />
         </Routes>
       </Layout>
     </div>
