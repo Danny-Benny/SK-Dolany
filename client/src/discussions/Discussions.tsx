@@ -33,9 +33,20 @@ const Discussions = () => {
 
   return (
     <div>
-      {userRole === "public" && <DiscussionsSelector title={"Verejnost"} />}
-      {userRole === "citizen" && <DiscussionsSelector title={"Občané dolan"} />}
-      {userRole === "player" && <DiscussionsSelector title={"Hráči SK"} />}
+      {(userRole === "public" ||
+        userRole === "citizen" ||
+        userRole === "player" ||
+        userRole === "management") && (
+        <DiscussionsSelector title={"Verejnost"} />
+      )}
+      {(userRole === "citizen" ||
+        userRole === "player" ||
+        userRole === "management") && (
+        <DiscussionsSelector title={"Občané dolan"} />
+      )}
+      {(userRole === "player" || userRole === "management") && (
+        <DiscussionsSelector title={"Hráči SK"} />
+      )}
       {userRole === "management" && <DiscussionsSelector title={"Výbor SK"} />}
     </div>
   );
