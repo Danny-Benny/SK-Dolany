@@ -1,71 +1,93 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../db");
+const passport = require("passport");
 
-//post a discussion
+// Create a discussion
 router.post("/discussions", async (req, res) => {
   try {
-    const { discussion_title } = req.body;
-    const newDisscussion = await pool.query(
-      "INSERT INTO discussion (discussion_title) VALUES($1) RETURNING *",
-      [discussion_title]
+    const { topic } = req.body;
+    const author_id = req.user.id;
+    const newDiscussion = await pool.query(
+      "INSERT INTO discussions (group_id, author_id, topic) VALUES($1, $2, $3) RETURNING *",
+      [req.body.group_id, author_id, topic]
     );
-    res.json(newDisscussion.rows[0]);
+    res.json(newDiscussion.rows[0]);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
-//get all discussions
+// Get all discussions
 router.get("/discussions", async (req, res) => {
   try {
-    const allDiscussions = await pool.query("SELECT * FROM discussion");
+    const allDiscussions = await pool.query("SELECT * FROM discussions");
     res.json(allDiscussions.rows);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
-//get a discussion by id
+// Get a discussion by id
 router.get("/discussions/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const newDisscussion = await pool.query(
-      "SELECT * FROM discussion WHERE id = $1",
+    const discussion = await pool.query(
+      "SELECT * FROM discussions WHERE discussion_id = $1",
       [id]
     );
-    res.json(newDisscussion.rows[0]);
+    res.json(discussion.rows[0]);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
-//update a discussion by id
+// Update a discussion by id
 router.put("/discussions/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { discussion_title } = req.body;
-    const updateDisscussion = await pool.query(
-      "UPDATE discussion SET discussion_title = $1 WHERE id = $2",
-      [discussion_title, id]
+    const { topic } = req.body;
+    const updatedDiscussion = await pool.query(
+      "UPDATE discussions SET topic = $1 WHERE discussion_id = $2 RETURNING *",
+      [topic, id]
     );
-    res.json(updateDisscussion.rows[0]);
+    res.json(updatedDiscussion.rows[0]);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
-//delete a discussion by id
+// Delete a discussion by id
 router.delete("/discussions/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteDisscussion = await pool.query(
-      "DELETE FROM discussion WHERE id = $1",
+    const deletedDiscussion = await pool.query(
+      "DELETE FROM discussions WHERE discussion_id = $1 RETURNING *",
       [id]
     );
-    res.json(deleteDisscussion.rows[0]);
+    res.json(deletedDiscussion.rows[0]);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// Get discussions by group ID
+router.get("/discussions/:groupId", async (req, res) => {
+  try {
+    const { groupId } = req.params;
+    const discussionsByGroup = await pool.query(
+      "SELECT * FROM discussions WHERE group_id = $1",
+      [groupId]
+    );
+    res.json(discussionsByGroup.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 

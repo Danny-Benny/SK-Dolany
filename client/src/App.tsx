@@ -7,6 +7,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Profile from "./components/auth/Profile";
 import Discussions from "./discussions/Discussions";
+import DiscussionsFeed from "./discussions/components/discussionsFeed";
 
 function App() {
   return (
@@ -18,6 +19,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/discussions" element={<Discussions />} />
+          <Route
+            path="/discussions/feed/:groupId"
+            element={<DiscussionsFeed />}
+          />
         </Routes>
       </Layout>
     </div>
