@@ -2,19 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { GoCommentDiscussion } from "react-icons/go";
 import { DiscussionsSelectorProps } from "./types";
+import { GROUP_ID_MAP, GROUP_ID_MAP_TYPE } from "../../constants";
 
 const DiscussionsSelector = (props: DiscussionsSelectorProps) => {
   const navigate = useNavigate();
-  const groupIdMap = {
-    Verejnost: 1,
-    "Občané dolan": 2,
-    "Hráči SK": 3,
-    "Výbor SK": 4,
-  };
-
   const handleClick = () => {
     navigate(
-      `/discussions/feed/${groupIdMap[props.title as keyof typeof groupIdMap]}`
+      `/discussions/feed/${GROUP_ID_MAP[props.title as GROUP_ID_MAP_TYPE]}`
     );
   };
 

@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../db");
-const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
 // Create a discussion
 router.post("/discussions", async (req, res) => {
   try {
     const { topic } = req.body;
-    const author_id = req.user.id;
+    // const author_id = req.user.id;
+    const author_id = jwt.verify(req.headers["x-auth-token"], "abc").id;
     const newDiscussion = await pool.query(
       "INSERT INTO discussions (group_id, author_id, topic) VALUES($1, $2, $3) RETURNING *",
       [req.body.group_id, author_id, topic]
@@ -24,6 +25,21 @@ router.get("/discussions", async (req, res) => {
   try {
     const allDiscussions = await pool.query("SELECT * FROM discussions");
     res.json(allDiscussions.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// Get discussions by group ID
+router.get("/discussions/byGroupId/:groupId", async (req, res) => {
+  try {
+    const { groupId } = req.params;
+    const discussionsByGroup = await pool.query(
+      "SELECT * FROM discussions WHERE group_id = $1",
+      [groupId]
+    );
+    res.json(discussionsByGroup.rows);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -70,21 +86,6 @@ router.delete("/discussions/:id", async (req, res) => {
       [id]
     );
     res.json(deletedDiscussion.rows[0]);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
-// Get discussions by group ID
-router.get("/discussions/:groupId", async (req, res) => {
-  try {
-    const { groupId } = req.params;
-    const discussionsByGroup = await pool.query(
-      "SELECT * FROM discussions WHERE group_id = $1",
-      [groupId]
-    );
-    res.json(discussionsByGroup.rows);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
