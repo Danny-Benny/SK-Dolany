@@ -64,33 +64,43 @@ const DiscussionsFeed = () => {
   }
 
   return (
-    <div>
-      <h2>Jedná se o {groupName}</h2>
-      <div style={{ marginBottom: 30 }}>
-        <label htmlFor="topic_creator">Topic:</label>
-        <input
-          id="topic_creator"
-          name="topic_creator"
-          type="text"
-          value={newTopic}
-          onChange={(e) => setNewTopic(e.target.value)}
-        />
-        <button
-          onClick={async () => await saveNewTopic()}
-          style={{ background: "red" }}
-        >
-          Submit
-        </button>
+    <>
+      <div className="p-6">
+        <h2 className="text-xl font-bold mb-4">{groupName}</h2>
+        <div className="mb-6">
+          <label
+            htmlFor="topic_creator"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Topic:
+          </label>
+          <input
+            id="topic_creator"
+            name="topic_creator"
+            type="text"
+            value={newTopic}
+            style={{ width: "350px" }}
+            onChange={(e) => setNewTopic(e.target.value)}
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+          />
+          <button
+            onClick={async () => await saveNewTopic()}
+            className="mt-2 font-bold py-2 px-4 rounded"
+          >
+            Submit
+          </button>
+        </div>
       </div>
+
       {discussions.map((s) => (
-        <div style={{ marginTop: 10 }}>
-          <p>discussion_id: {s.discussion_id}</p>
-          <p>author_id: {s.author_id}</p>
-          <p>group_id: {s.group_id}</p>
-          <p>topic: {s.topic}</p>
+        <div className="pt-6 pb-6 mt-6 bg-white rounded-2xl shadow-xl">
+          <div className="mt-4 p-4 bg-gray-100 rounded-lg">
+            <p className="text-lg font-semibold">{s.topic}</p>
+            <p className="text-sm text-gray-600">Author: {s.author_id}</p>
+          </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 
