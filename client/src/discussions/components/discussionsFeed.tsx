@@ -63,6 +63,33 @@ const DiscussionsFeed = () => {
     cached_fetch_discussions();
   }
 
+  const [discussionPosts, setDiscussionPosts] = useState<{
+    [key: number]: any[];
+  }>({});
+
+  function fetchDiscussionPosts(discussionId: number) {
+    fetch(
+      `http://localhost:5000/discussions_posts/discussions_posts/byDiscussionId/${discussionId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Auth-Token": localStorage.getItem("token"),
+        } as any,
+      }
+    )
+      .then((response) => response.json())
+      .then((posts) => {
+        console.log(
+          "Fetched posts for discussion ID " + discussionId + ":",
+          posts
+        );
+        setDiscussionPosts((prevPosts) => ({
+          ...prevPosts,
+          [discussionId]: posts,
+        }));
+      });
+  }
   return (
     <>
       <div className="p-6">
@@ -93,10 +120,18 @@ const DiscussionsFeed = () => {
       </div>
 
       {discussions.map((s) => (
-        <div className="pt-6 pb-6 mt-6 bg-white rounded-2xl shadow-xl">
+        <div
+          key={s.discussion_id}
+          className="pt-6 pb-6 mt-6 bg-white rounded-2xl shadow-xl"
+        >
           <div className="mt-4 p-4 bg-gray-100 rounded-lg">
             <p className="text-lg font-semibold">{s.topic}</p>
             <p className="text-sm text-gray-600">Author: {s.author_id}</p>
+            {discussionPosts[s.discussion_id]?.map((post) => (
+              <div key={post.post_id}>
+                <p>{post.content}</p>
+              </div>
+            ))}
           </div>
         </div>
       ))}
