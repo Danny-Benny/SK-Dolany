@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { GROUP_ID_MAP, GROUP_ID_MAP_TYPE } from "../../constants";
 import { Groups } from "./types";
+import DiscussionsSender from "./discussionsSender";
 
 const DiscussionsFeed = () => {
   const { groupId } = useParams();
@@ -137,6 +138,12 @@ const DiscussionsFeed = () => {
                 <p>{post.content}</p>
               </div>
             ))}
+            <DiscussionsSender
+              discussionId={s.discussion_id}
+              refreshCallback={() => {
+                fetchDiscussionPosts(s.discussion_id);
+              }}
+            />
           </div>
         </div>
       ))}
