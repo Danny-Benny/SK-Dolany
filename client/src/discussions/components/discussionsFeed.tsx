@@ -90,6 +90,11 @@ const DiscussionsFeed = () => {
         }));
       });
   }
+
+  React.useEffect(() => {
+    discussions.forEach((s) => fetchDiscussionPosts(s.discussion_id));
+  }, [discussions]);
+
   return (
     <>
       <div className="p-6">
