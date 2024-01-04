@@ -28,11 +28,11 @@ export const Navbar = () => {
         <div className="flex justify-between items-center px-4">
           <Link
             to="/"
-            className="m-4 text-2xl font-bold text-white block absolute top-0"
+            className="m-4 text-2xl font-bold text-white block top-0 absolute"
           >
             <img src="./assets/logo.png" alt="" className="relative -mt-4" />
           </Link>
-          <ul className="flex ml-auto relative -mr-4 text-white">
+          <ul className="flex ml-auto items-center -mr-4 text-white">
             <li className="p-2">
               <Link to="/roster">Soupiska týmu</Link>
             </li>
@@ -40,12 +40,14 @@ export const Navbar = () => {
               <Link to="/league-matches">Ligové zápasy</Link>
             </li>
             <li className="p-2">
-              <Link to="/galery">Fotogalerie</Link>
+              <a href="https://foto.obecdolany.cz:5443/#/shared_space/folder/55">
+                Fotogalerie
+              </a>
             </li>
             <li className="p-2">
               <Link to="/discussions">Diskuze</Link>
             </li>
-            <li className="p-2">
+            <li className="p-2 flex items-center">
               <button onClick={handleUserClick}>
                 <FaUser size={"25px"} />
               </button>
