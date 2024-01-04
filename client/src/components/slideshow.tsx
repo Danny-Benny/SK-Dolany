@@ -37,7 +37,7 @@ const Slideshow = ({ images, title1, title2 }: SlideshowProps) => {
         <h2 className="text-2xl text-white font-bold">{title2}</h2>
       </div>
       <FaArrowDown
-        size={"25px"}
+        size={"35px"}
         className="absolute bottom-0 left-0 mb-32 ml-12 text-white cursor-pointer z-20"
         onClick={handleScrollDown}
       />
