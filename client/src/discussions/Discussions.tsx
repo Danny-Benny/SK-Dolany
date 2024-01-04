@@ -32,7 +32,7 @@ const Discussions = () => {
   }
 
   return (
-    <div>
+    <div className="flex items-center justify-center pt-4">
       {(userRole === "public" ||
         userRole === "citizen" ||
         userRole === "player" ||

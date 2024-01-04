@@ -14,7 +14,7 @@ const DiscussionsSelector = (props: DiscussionsSelectorProps) => {
 
   return (
     <div
-      className="bg-white rounded-2xl shadow-xl p-6 inline-block text-center"
+      className="bg-white rounded-2xl shadow-xl p-6 inline-block text-center ml-3"
       onClick={handleClick}
     >
       <div className="flex flex-col items-center">
