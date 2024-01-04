@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FaArrowDown } from "react-icons/fa"; // Import the arrow icon
 import "./slideshow.css";
 import { SlideshowProps } from "../home/components/types";
 
@@ -7,13 +8,18 @@ const Slideshow = ({ images, title1, title2 }: SlideshowProps) => {
 
   useEffect(() => {
     const nextImage = (activeIndex + 1) % images.length;
-
     const interval = setInterval(() => {
       setActiveIndex(nextImage);
     }, 5000);
-
     return () => clearInterval(interval);
   }, [activeIndex, images]);
+
+  const handleScrollDown = () => {
+    window.scrollTo({
+      top: document.documentElement.clientHeight,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <div className="slideshow-container relative">
@@ -30,6 +36,11 @@ const Slideshow = ({ images, title1, title2 }: SlideshowProps) => {
         <h1 className="text-8xl text-white font-bold">{title1}</h1>
         <h2 className="text-2xl text-white font-bold">{title2}</h2>
       </div>
+      <FaArrowDown
+        size={"25px"}
+        className="absolute bottom-0 left-0 mb-32 ml-12 text-white cursor-pointer z-20"
+        onClick={handleScrollDown}
+      />
     </div>
   );
 };
