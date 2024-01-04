@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaArrowDown } from "react-icons/fa"; // Import the arrow icon
+import { FaArrowDown } from "react-icons/fa";
 import "./slideshow.css";
 import { SlideshowProps } from "../home/components/types";
 

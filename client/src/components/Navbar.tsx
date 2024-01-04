@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Slideshow from "./slideshow";
 import { FaUser } from "react-icons/fa";
 import { useAuth } from "./auth/AuthContext";
@@ -11,8 +11,8 @@ const images = [
 
 export const Navbar = () => {
   const location = useLocation();
-  const navigate = useNavigate(); // Use useNavigate here
-  const auth = useAuth(); // Use the auth hook
+  const navigate = useNavigate();
+  const auth = useAuth();
 
   const handleUserClick = () => {
     if (!auth.isAuthenticated()) {
