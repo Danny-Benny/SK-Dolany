@@ -1,7 +1,8 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom"; // Import useNavigate
 import Slideshow from "./slideshow";
-
+import { FaUser } from "react-icons/fa";
+import { useAuth } from "./auth/AuthContext";
 const images = [
   "./assets/slideshow1.jpeg",
   "./assets/slideshow2.jpeg",
@@ -10,6 +11,16 @@ const images = [
 
 export const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate(); // Use useNavigate here
+  const auth = useAuth(); // Use the auth hook
+
+  const handleUserClick = () => {
+    if (!auth.isAuthenticated()) {
+      navigate("/login");
+    } else {
+      navigate("/profile");
+    }
+  };
 
   return (
     <>
@@ -33,6 +44,11 @@ export const Navbar = () => {
             </li>
             <li className="p-2">
               <Link to="/discussions">Diskuze</Link>
+            </li>
+            <li className="p-2">
+              <button onClick={handleUserClick}>
+                <FaUser size={"25px"} />
+              </button>
             </li>
           </ul>
         </div>
