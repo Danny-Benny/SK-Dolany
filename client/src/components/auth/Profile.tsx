@@ -51,6 +51,13 @@ const Profile: React.FC = () => {
     fetchProfile();
   }, [navigate]);
 
+  const handleLogout = () => {
+    // Remove the token from local storage
+    localStorage.removeItem("token");
+    // Navigate the user to the login page
+    navigate("/login");
+  };
+
   if (loading) {
     return <div className="text-center mt-5">Loading...</div>;
   }
@@ -92,6 +99,12 @@ const Profile: React.FC = () => {
           No profile data available.
         </div>
       )}
+      <button
+        onClick={handleLogout}
+        className="mt-4 w-full bg-mygreen text-white py-2 rounded hover:bg-mygreen2 transition duration-300"
+      >
+        Logout
+      </button>
     </div>
   );
 };

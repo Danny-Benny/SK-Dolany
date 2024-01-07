@@ -46,4 +46,16 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
+const tokenBlacklist = new Set(); // This should ideally be a persistent storage
+
+router.post("/logout", (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (token) {
+    tokenBlacklist.add(token); // Add the token to the blacklist
+    res.status(200).json({ message: "Logged out successfully" });
+  } else {
+    res.status(400).json({ message: "No token provided" });
+  }
+});
+
 module.exports = router;
