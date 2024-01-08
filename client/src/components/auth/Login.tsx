@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ForgotPasswordModal from "./resetPassword";
+import ForgotPasswordModal from "./forgotPassword";
 
 const Login = () => {
   const navigate = useNavigate();

@@ -1,55 +1,60 @@
 import React, { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-type ForgotPasswordModalProps = {
-  onClose: () => void;
-};
+const ResetPassword = () => {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
-const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
-  onClose,
-}) => {
-  const [email, setEmail] = useState("");
+  const resetToken = searchParams.get("token");
 
-  const handleResetRequest = async () => {
+  const handlePasswordReset = async () => {
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
     try {
       const response = await fetch(
-        "http://localhost:5000/mailer/requestResetPassword",
+        "http://localhost:5000/mailer/resetPassword",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ token: resetToken, password }),
         }
       );
 
       if (response.ok) {
-        console.log("Reset link sent to email");
+        alert("Password reset successfully");
+        navigate("/login");
       } else {
-        console.error("Failed to send reset link");
+        alert("Failed to reset password");
       }
     } catch (error) {
       console.error("Error:", error);
     }
-    onClose();
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <span className="close" onClick={onClose}>
-          &times;
-        </span>
-        <h2>Reset Password</h2>
-        <input
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <button onClick={handleResetRequest}>Request Password Reset</button>
-      </div>
+    <div className="reset-password-form">
+      <input
+        type="password"
+        placeholder="New Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Confirm New Password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+      />
+      <button onClick={handlePasswordReset}>Reset Password</button>
     </div>
   );
 };
 
-export default ForgotPasswordModal;
+export default ResetPassword;

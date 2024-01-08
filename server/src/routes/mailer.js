@@ -34,7 +34,7 @@ router.post("/requestResetPassword", async (req, res) => {
     from: "danielbenes04@gmail.com",
     to: user.email,
     subject: "Resetovaní hesla",
-    text: `Pro resetovaní hesla klikněte na tento odkaz: http://yourfrontenddomain/reset-password?token=${resetToken}`,
+    text: `Pro resetovaní hesla klikněte na tento odkaz: http://localhost:3000/reset-password?token=${resetToken}`,
   };
 
   transporter.sendMail(mailOptions, function (err, info) {
@@ -49,21 +49,18 @@ router.post("/requestResetPassword", async (req, res) => {
 
 //Endpoint for resetting password
 router.post("/resetPassword", async (req, res) => {
-  const { token, password } = req.body;
+  const { password, token } = req.body;
+
+  if (!password || !token) {
+    return res.status(400).json({ message: "Missing data" });
+  }
 
   try {
     const decoded = jwt.verify(token, secretKey);
-    const user = await findByEmail(decoded.email);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    await updatePassword(user.id, password);
-
+    await updatePassword(decoded.id, password);
     res.send("Heslo bylo změněno");
   } catch (error) {
-    res.status(400).json({ message: "Invalid token" });
+    return res.status(400).json({ message: "Invalid token" });
   }
 });
 
