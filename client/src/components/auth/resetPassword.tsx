@@ -39,20 +39,30 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="reset-password-form">
-      <input
-        type="password"
-        placeholder="New Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Confirm New Password"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
-      <button onClick={handlePasswordReset}>Reset Password</button>
+    <div className="flex items-center justify-center h-screen">
+      <div className="bg-white p-6 text-center rounded-2xl shadow-xl max-w-sm">
+        <h2 className="text-2xl font-bold mb-4">Reset Password</h2>
+        <input
+          type="password"
+          placeholder="New Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="p-2 border rounded w-full mb-2"
+        />
+        <input
+          type="password"
+          placeholder="Confirm New Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          className="p-2 border rounded w-full mb-4"
+        />
+        <button
+          onClick={handlePasswordReset}
+          className="bg-mygreen text-white hover:bg-mygreen2 transition duration-300 p-2 rounded w-full"
+        >
+          Reset Password
+        </button>
+      </div>
     </div>
   );
 };
