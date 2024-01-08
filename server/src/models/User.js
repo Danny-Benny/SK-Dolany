@@ -39,4 +39,50 @@ async function findById(id) {
   }
 }
 
-module.exports = { createUser, findByUsername, findById };
+async function findByEmail(email) {
+  try {
+    const user = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
+
+    if (user.rows.length === 0) {
+      return null;
+    }
+
+    return user.rows[0];
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function updateResetToken(id, resetToken) {
+  try {
+    await pool.query("UPDATE users SET reset_token = $1 WHERE id = $2", [
+      resetToken,
+      id,
+    ]);
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function updatePassword(id, password) {
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await pool.query("UPDATE users SET password = $1 WHERE id = $2", [
+      hashedPassword,
+      id,
+    ]);
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = {
+  createUser,
+  findByUsername,
+  findById,
+  findByEmail,
+  updateResetToken,
+  updatePassword,
+};

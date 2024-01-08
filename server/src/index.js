@@ -18,6 +18,7 @@ app.use("/discussions_posts", require("./routes/discussions_posts"));
 app.use("/seasons_links", require("./routes/seasons_links"));
 app.use("/sponsors", require("./routes/sponsors"));
 app.use("/photos", require("./routes/photos"));
+app.use("/mailer", require("./routes/mailer"));
 
 const PORT = process.env.PORT || 5000;
 

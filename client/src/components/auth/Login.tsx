@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ForgotPasswordModal from "./resetPassword";
 
 const Login = () => {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const [showModal, setShowModal] = useState(false);
 
   const handleLogin = async () => {
     try {
@@ -69,6 +72,10 @@ const Login = () => {
             <button onClick={handleLogin} className=" text-black p-2 rounded">
               Login
             </button>
+            <button onClick={() => setShowModal(true)}>Forgot Password?</button>
+            {showModal && (
+              <ForgotPasswordModal onClose={() => setShowModal(false)} />
+            )}
           </div>
         </div>
       </div>
