@@ -64,18 +64,23 @@ const Login = () => {
           <div className="flex justify-between">
             <button
               onClick={() => navigate("/register")}
-              className="text-black p-2 rounded"
+              className="mt-2 font-bold py-2 px-3 rounded-md bg-mygreen text-white hover:bg-mygreen2 transition duration-300"
             >
               Ještě nemáte účet?
             </button>
             <div></div>
-            <button onClick={handleLogin} className=" text-black p-2 rounded">
-              Login
+            <button onClick={() => setShowModal(true)} className="mt-2 px-3">
+              Zapomenute heslo?
             </button>
-            <button onClick={() => setShowModal(true)}>Forgot Password?</button>
             {showModal && (
               <ForgotPasswordModal onClose={() => setShowModal(false)} />
             )}
+            <button
+              onClick={handleLogin}
+              className="mt-2 font-bold py-2 px-3 rounded-md bg-mygreen text-white hover:bg-mygreen2 transition duration-300"
+            >
+              Login
+            </button>
           </div>
         </div>
       </div>

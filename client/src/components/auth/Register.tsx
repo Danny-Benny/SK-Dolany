@@ -121,12 +121,15 @@ const Register = () => {
           <div className="flex justify-between">
             <button
               onClick={() => navigate("/login")}
-              className="text-black p-2 rounded"
+              className="mt-2 font-bold py-2 px-3 rounded-md bg-mygreen text-white hover:bg-mygreen2 transition duration-300"
             >
               Už mám účet
             </button>
             <div></div>
-            <button onClick={handleRegister} className="text-black p-2 rounded">
+            <button
+              onClick={handleRegister}
+              className="mt-2 font-bold py-2 px-3 rounded-md bg-mygreen text-white hover:bg-mygreen2 transition duration-300"
+            >
               Registrace
             </button>
           </div>
