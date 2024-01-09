@@ -36,7 +36,7 @@ router.get("/discussions/byGroupId/:groupId", async (req, res) => {
   try {
     const { groupId } = req.params;
     const discussionsByGroup = await pool.query(
-      "SELECT * FROM discussions WHERE group_id = $1",
+      "SELECT discussions.*, users.username FROM discussions JOIN users ON discussions.author_id = users.id WHERE group_id = $1",
       [groupId]
     );
     res.json(discussionsByGroup.rows);

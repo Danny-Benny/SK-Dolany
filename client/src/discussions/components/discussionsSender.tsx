@@ -39,7 +39,7 @@ const DiscussionsSender = (props: Props) => {
           htmlFor="post_creator"
           className="block text-sm font-medium text-gray-700"
         >
-          Post:
+          Příspěvek:
         </label>
         <input
           id="post_creator"
@@ -52,9 +52,9 @@ const DiscussionsSender = (props: Props) => {
         />
         <button
           onClick={async () => await saveNewPost(props.discussionId)}
-          className="mt-2 font-bold py-2 px-4 rounded"
+          className="mt-2 font-bold py-2 px-3 rounded-md bg-mygreen text-white hover:bg-mygreen2 transition duration-300"
         >
-          Submit
+          Odeslat
         </button>
       </div>
     </>

@@ -105,7 +105,7 @@ const DiscussionsFeed = () => {
             htmlFor="topic_creator"
             className="block text-sm font-medium text-gray-700"
           >
-            Topic:
+            Téma:
           </label>
           <input
             id="topic_creator"
@@ -118,9 +118,9 @@ const DiscussionsFeed = () => {
           />
           <button
             onClick={async () => await saveNewTopic()}
-            className="mt-2 font-bold py-2 px-4 rounded"
+            className="mt-2 font-bold py-2 px-3 rounded-md bg-mygreen text-white hover:bg-mygreen2 transition duration-300"
           >
-            Submit
+            Odeslat
           </button>
         </div>
       </div>
@@ -128,14 +128,24 @@ const DiscussionsFeed = () => {
       {discussions.map((s) => (
         <div
           key={s.discussion_id}
-          className="pt-6 pb-6 mt-6 bg-white rounded-2xl shadow-xl"
+          className="mt-6 bg-white rounded-2xl shadow-xl"
         >
           <div className="mt-4 p-4 bg-gray-100 rounded-lg">
             <p className="text-lg font-semibold">{s.topic}</p>
-            <p className="text-sm text-gray-600">Author: {s.author_id}</p>
-            {discussionPosts[s.discussion_id]?.map((post) => (
-              <div key={post.post_id}>
-                <p>{post.content}</p>
+            <p className="text-sm text-gray-600">Autor diskuze: {s.username}</p>
+            {discussionPosts[s.discussion_id]?.map((post, index) => (
+              <div
+                key={post.post_id}
+                className={`flex ${
+                  index % 2 === 1 ? "bg-grey rounded-md" : ""
+                }`}
+              >
+                <div className="w-3/4">
+                  <p>{post.content}</p>
+                </div>
+                <div className="w-1/4">
+                  <p className="text-right">Uzivatel: {post.username}</p>
+                </div>
               </div>
             ))}
             <DiscussionsSender

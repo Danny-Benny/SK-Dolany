@@ -3,6 +3,7 @@ export interface DiscussionsSelectorProps {
 }
 
 export interface Groups {
+  username: string;
   discussion_id: number;
   group_id: number;
   author_id: number;

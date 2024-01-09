@@ -38,7 +38,7 @@ router.get(
     try {
       const { discussion_id } = req.params;
       const discussionsPostsByDiscussion = await pool.query(
-        "SELECT * FROM discussion_posts WHERE discussion_id = $1",
+        "SELECT discussion_posts.*, users.username FROM discussion_posts JOIN users ON discussion_posts.author_id = users.id WHERE discussion_id = $1",
         [discussion_id]
       );
       res.json(discussionsPostsByDiscussion.rows);
