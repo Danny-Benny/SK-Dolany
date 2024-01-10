@@ -25,14 +25,11 @@ const Profile: React.FC = () => {
       }
 
       try {
-        const response = await fetch(
-          "http://localhost:5000/protected/profile",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await fetch("/protected/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
@@ -72,9 +69,7 @@ const Profile: React.FC = () => {
       {userProfile ? (
         <div>
           <div className="mb-4">
-            <span className="block text-gray-700 font-bold">
-              Uživatelské Jméno
-            </span>
+            <span className="block text-gray-700 font-bold">Uživatelské Jméno</span>
             <span className="block text-gray-600">{userProfile.username}</span>
           </div>
           <div className="mb-4">
@@ -95,9 +90,7 @@ const Profile: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="text-center text-gray-600">
-          No profile data available.
-        </div>
+        <div className="text-center text-gray-600">No profile data available.</div>
       )}
       <button
         onClick={handleLogout}

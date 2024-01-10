@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:5000/auth/login", {
+      const response = await fetch("/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,9 +72,7 @@ const Login = () => {
             <button onClick={() => setShowModal(true)} className="mt-2 px-3">
               Zapomenute heslo?
             </button>
-            {showModal && (
-              <ForgotPasswordModal onClose={() => setShowModal(false)} />
-            )}
+            {showModal && <ForgotPasswordModal onClose={() => setShowModal(false)} />}
             <button
               onClick={handleLogin}
               className="mt-2 font-bold py-2 px-3 rounded-md bg-mygreen text-white hover:bg-mygreen2 transition duration-300"

@@ -16,16 +16,13 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/mailer/resetPassword",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token: resetToken, password }),
-        }
-      );
+      const response = await fetch("/mailer/resetPassword", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token: resetToken, password }),
+      });
 
       if (response.ok) {
         alert("Password reset successfully");

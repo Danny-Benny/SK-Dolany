@@ -5,7 +5,14 @@
   "main": "./src/index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod:start": "cross-env NODE_ENV=production pm2 start src/index.js --time --name sk_dolany",
+    "prod:logs": "pm2 logs",
+    "prod:logs-flush": "pm2 flush",
+    "prod:stop": "pm2 stop all",
+    "prod:delete": "pm2 delete all",
+    "prod:restart": "pm2 reload all",
+    "prod:restart-force": "pm2 restart all --update-env"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +20,7 @@
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.8",
@@ -20,7 +28,9 @@
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "pg": "^8.11.3",
-    "pg-promise": "^11.5.4"
+    "pg-promise": "^11.5.4",
+    "pm2": "^5.3.0"
   }
 }

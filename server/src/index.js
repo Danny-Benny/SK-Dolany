@@ -2,11 +2,14 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const passport = require("passport");
+const path = require("path");
 
 //middleware
 app.use(cors());
 app.use(passport.initialize());
 app.use(express.json()); //req.body
+
+app.use(express.static(path.join(__dirname, "../../client/build")));
 
 //ROUTES//
 app.use("/auth", require("./routes/auth"));
@@ -20,7 +23,7 @@ app.use("/sponsors", require("./routes/sponsors"));
 app.use("/photos", require("./routes/photos"));
 app.use("/mailer", require("./routes/mailer"));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.NODE_ENV !== "production" ? 5000 : 80;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

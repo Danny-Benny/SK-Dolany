@@ -34,12 +34,6 @@ export const Navbar = () => {
           </Link>
           <ul className="flex ml-auto items-center -mr-4 text-white">
             <li className="p-2">
-              <Link to="/roster">Soupiska týmu</Link>
-            </li>
-            <li className="p-2">
-              <Link to="/league-matches">Ligové zápasy</Link>
-            </li>
-            <li className="p-2">
               <a href="https://foto.obecdolany.cz:5443/#/shared_space/folder/55">
                 Fotogalerie
               </a>

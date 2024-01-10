@@ -24,7 +24,7 @@ const Register = () => {
 
       setPasswordsMatch(true);
 
-      const response = await fetch("http://localhost:5000/auth/register", {
+      const response = await fetch("/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,10 +91,7 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="p-2 border rounded w-full mb-2"
             />
-            <button
-              className="absolute top-0 right-0 mt-2 mr-2"
-              onClick={() => setShowPassword(!showPassword)}
-            >
+            <button className="absolute top-0 right-0 mt-2 mr-2" onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? "Hide" : "Show"}
             </button>
           </div>
@@ -113,11 +110,7 @@ const Register = () => {
               {showPasswordAgain ? "Hide" : "Show"}
             </button>
           </div>
-          {!passwordsMatch && (
-            <p className="text-red-500 text-left">
-              Hesla nejsou shodná. Zadejte stejná hesla.
-            </p>
-          )}
+          {!passwordsMatch && <p className="text-red-500 text-left">Hesla nejsou shodná. Zadejte stejná hesla.</p>}
           <div className="flex justify-between">
             <button
               onClick={() => navigate("/login")}

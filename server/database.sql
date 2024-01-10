@@ -1,14 +1,15 @@
 create table users
 (
-    id       serial
+    id          serial
         primary key,
-    username varchar(255) not null
+    username    varchar(255) not null
         unique,
-    password text         not null,
-    name     varchar(255),
-    surname  varchar(255),
-    email    varchar(255),
-    role     varchar(255)
+    password    text         not null,
+    name        varchar(255),
+    surname     varchar(255),
+    email       varchar(255),
+    role        varchar(255),
+    reset_token varchar(255)
 );
 
 alter table users

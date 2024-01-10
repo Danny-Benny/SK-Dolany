@@ -1,5 +1,4 @@
 import React from "react";
-import { Navbar } from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./home/Home";
@@ -8,7 +7,7 @@ import Login from "./components/auth/Login";
 import Profile from "./components/auth/Profile";
 import Discussions from "./discussions/Discussions";
 import DiscussionsFeed from "./discussions/components/discussionsFeed";
-import ResetPassword from "./components/auth/ResetPassword";
+import ResetPassword from "./components/auth/resetPassword";
 
 function App() {
   return (
@@ -20,10 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/discussions" element={<Discussions />} />
-          <Route
-            path="/discussions/feed/:groupId"
-            element={<DiscussionsFeed />}
-          />
+          <Route path="/discussions/feed/:groupId" element={<DiscussionsFeed />} />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </Layout>

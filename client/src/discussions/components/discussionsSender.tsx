@@ -7,20 +7,17 @@ interface Props {
 const DiscussionsSender = (props: Props) => {
   const [newPost, setNewPost] = useState<string>("");
   async function saveNewPost(discussionId: number) {
-    const response = await fetch(
-      "http://localhost:5000/discussions_posts/discussions_posts",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Auth-Token": localStorage.getItem("token"),
-        } as any,
-        body: JSON.stringify({
-          discussion_id: discussionId,
-          content: newPost,
-        }),
-      }
-    );
+    const response = await fetch("/discussions_posts/discussions_posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Auth-Token": localStorage.getItem("token"),
+      } as any,
+      body: JSON.stringify({
+        discussion_id: discussionId,
+        content: newPost,
+      }),
+    });
 
     if (!response.ok) {
       return;
@@ -35,10 +32,7 @@ const DiscussionsSender = (props: Props) => {
   return (
     <>
       <div className="mt-6">
-        <label
-          htmlFor="post_creator"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="post_creator" className="block text-sm font-medium text-gray-700">
           Příspěvek:
         </label>
         <input
