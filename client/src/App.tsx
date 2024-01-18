@@ -19,7 +19,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/discussions" element={<Discussions />} />
-          <Route path="/discussions/feed/:groupId" element={<DiscussionsFeed />} />
+          <Route
+            path="/discussions/feed/:groupId"
+            element={<DiscussionsFeed />}
+          />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </Layout>

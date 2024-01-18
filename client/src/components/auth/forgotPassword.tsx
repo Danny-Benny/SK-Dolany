@@ -4,7 +4,9 @@ type ForgotPasswordModalProps = {
   onClose: () => void;
 };
 
-const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({ onClose }) => {
+const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
+  onClose,
+}) => {
   const [email, setEmail] = useState("");
 
   const handleResetRequest = async () => {
@@ -35,7 +37,12 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({ onClose }) =>
           &times;
         </span>
         <h2>Reset Password</h2>
-        <input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <button onClick={handleResetRequest}>Request Password Reset</button>
       </div>
     </div>
