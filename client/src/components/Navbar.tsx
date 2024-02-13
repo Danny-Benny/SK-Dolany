@@ -39,6 +39,9 @@ export const Navbar = () => {
               </a>
             </li>
             <li className="p-2">
+              <Link to="/league-matches">Ligové zápasy</Link>
+            </li>
+            <li className="p-2">
               <Link to="/discussions">Diskuze</Link>
             </li>
             <li className="p-2 flex items-center">
