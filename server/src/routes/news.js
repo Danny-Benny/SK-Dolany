@@ -27,6 +27,7 @@ router.get("/news", async (req, res) => {
 });
 
 //get a new
+
 router.get("/news/:id", async (req, res) => {
   try {
     const { id } = req.params;

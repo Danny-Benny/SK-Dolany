@@ -19,14 +19,7 @@ export interface SponsorPictureProps {
 
 export interface NewsProps {
   id: number;
-  titleNews: string;
-  contentNews: string;
-  dateNews: string;
-}
-
-export interface NewsListProps {
-  id: number;
   title: string;
   content: string;
-  createdAt: string;
+  created_at: string;
 }
