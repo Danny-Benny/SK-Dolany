@@ -8,6 +8,7 @@ import Profile from "./components/auth/Profile";
 import Discussions from "./discussions/Discussions";
 import DiscussionsFeed from "./discussions/components/discussionsFeed";
 import ResetPassword from "./components/auth/resetPassword";
+import DiscussionDetail from "./discussions/components/discussionsDetail";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
           <Route
             path="/discussions/feed/:groupId"
             element={<DiscussionsFeed />}
+          />
+          <Route
+            path="/discussions/:discussionId"
+            element={<DiscussionDetail />}
           />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>

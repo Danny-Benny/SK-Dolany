@@ -10,8 +10,8 @@ router.post("/discussions", async (req, res) => {
     // const author_id = req.user.id;
     const author_id = jwt.verify(req.headers["x-auth-token"], "abc").id;
     const newDiscussion = await pool.query(
-      "INSERT INTO discussions (group_id, author_id, topic) VALUES($1, $2, $3) RETURNING *",
-      [req.body.group_id, author_id, topic]
+      "INSERT INTO discussions (author_id, topic) VALUES($1, $2 ) RETURNING *",
+      [author_id, topic]
     );
     res.json(newDiscussion.rows[0]);
   } catch (err) {
@@ -25,6 +25,21 @@ router.get("/discussions", async (req, res) => {
   try {
     const allDiscussions = await pool.query("SELECT * FROM discussions");
     res.json(allDiscussions.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+//get discussions by discussion id
+router.get("/discussions/byDiscussionId/:discussionId", async (req, res) => {
+  try {
+    const { discussionId } = req.params;
+    const discussion = await pool.query(
+      "SELECT * FROM discussions WHERE discussion_id = $1",
+      [discussionId]
+    );
+    res.json(discussion.rows[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
