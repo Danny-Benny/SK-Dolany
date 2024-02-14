@@ -9,7 +9,7 @@
 
 .animate-slide {
   display: flex;
-  animation: slide linear infinite;
+  animation: slide 35s linear infinite;
   will-change: transform;
 }
 
