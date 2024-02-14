@@ -5,8 +5,8 @@ import { FaUser } from "react-icons/fa";
 import { useAuth } from "./auth/AuthContext";
 const images = [
   "./assets/slideshow1.jpeg",
-  "./assets/slideshow2.jpeg",
-  "./assets/slideshow3.jpeg",
+  "./assets/slideshow2.jpg",
+  "./assets/slideshow3.JPG",
 ];
 
 export const Navbar = () => {
