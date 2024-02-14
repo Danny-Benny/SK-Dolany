@@ -6,6 +6,20 @@
     transform: translateX(-100%);
   }
 }
+
 .animate-slide {
-  animation: slide 16s linear infinite; /* Adjust the duration as needed */
+  display: flex;
+  animation: slide linear infinite;
+  will-change: transform;
+}
+
+.sponsor-image-container {
+  flex: 0 0 auto;
+  margin: 0 10px;
+}
+
+.sponsor-image-container img {
+  display: block;
+  max-height: 80px;
+  width: auto;
 }

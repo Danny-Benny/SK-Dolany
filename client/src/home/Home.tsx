@@ -147,8 +147,9 @@ const Home = () => {
           </div>
         </>
       )}
-
-      <Sponsors />
+      <div className="pt-6 pb-6">
+        <Sponsors />
+      </div>
     </div>
   );
 };

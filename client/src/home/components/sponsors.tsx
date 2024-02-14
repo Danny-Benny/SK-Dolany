@@ -1,57 +1,60 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./sponsors.css";
 
-const sponsorImages = [
-  "./assets/sponsor1.png",
-  "./assets/sponsor2.png",
-  "./assets/sponsor3.png",
-  "./assets/sponsor4.jpg",
-  "./assets/sponsor5.jpg",
-  "./assets/sponsor6.jpg",
+type SponsorImage = {
+  src: string;
+  link: string;
+};
+
+type ImageSize = {
+  src: string;
+  link: string;
+  width: number;
+  height: number;
+};
+
+const sponsorImages: SponsorImage[] = [
+  { src: "./assets/sponsor1.png", link: "https://www.obecdolany.cz/" },
+  { src: "./assets/sponsor2.png", link: "https://www.piskovnadolany.cz/" },
+  {
+    src: "./assets/sponsor3.png",
+    link: "https://www.facebook.com/farospelety",
+  },
+  { src: "./assets/sponsor4.jpg", link: "" },
+  { src: "./assets/sponsor5.jpg", link: "https://zzone.cz/" },
+  { src: "./assets/sponsor6.jpg", link: "https://www.guardian-frs.cz/" },
 ];
 
-const Sponsors = () => {
-  const [imageSizes, setImageSizes] = useState<any[]>([]);
+const Sponsors: React.FC = () => {
+  const [totalWidth, setTotalWidth] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const fetchImageSizes = async () => {
-      const sizes = await Promise.all(
-        [...sponsorImages, ...sponsorImages].map((image) => getImageSize(image))
-      );
-      setImageSizes(sizes);
-    };
+    let width = 0;
+    const images = containerRef.current?.getElementsByTagName("img") || [];
 
-    fetchImageSizes();
+    for (let i = 0; i < images.length; i++) {
+      width += images[i].offsetWidth;
+    }
+
+    setTotalWidth(width);
   }, []);
 
-  const getImageSize = (src: string): Promise<any> => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => {
-        resolve({ src, width: img.width, height: img.height });
-      };
-      img.src = src;
-
-      img.onerror = () => resolve({ src, width: 0, height: 0 });
-    });
+  const animationStyle = {
+    animationDuration: `${totalWidth / 100}s`,
   };
 
+  const doubledImages = [...sponsorImages, ...sponsorImages];
+
   return (
-    <div className="overflow-hidden relative">
-      <div className="flex animate-slide w-full">
-        {imageSizes.map(({ src, width, height }, index) => (
-          <img
-            key={index}
-            src={src}
-            alt={`Sponsor ${index + 1}`}
-            style={{
-              width: "auto",
-              height: "80px",
-              maxWidth: "100%",
-              maxHeight: "100%",
-            }}
-            className="m-6"
-          />
+    <div className="overflow-hidden relative rounded-xl shadow-xl">
+      <div className="animate-slide" style={animationStyle} ref={containerRef}>
+        {doubledImages.map(({ src, link }, index) => (
+          <div key={index} className="sponsor-image-container">
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              <img src={src} alt={`Sponsor ${index + 1}`} />
+            </a>
+          </div>
         ))}
       </div>
     </div>
