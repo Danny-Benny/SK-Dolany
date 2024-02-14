@@ -39,7 +39,9 @@ export const Navbar = () => {
               </a>
             </li>
             <li className="p-2">
-              <Link to="/league-matches">Ligové zápasy</Link>
+              <a href="https://www.fotbal.cz/souteze/turnaje/hlavni/baa61467-ec7d-4db7-8ec4-4266a14d5518">
+                Ligové zápasy
+              </a>
             </li>
             <li className="p-2">
               <Link to="/discussions">Diskuze</Link>
