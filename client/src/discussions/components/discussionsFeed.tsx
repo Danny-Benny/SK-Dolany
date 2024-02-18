@@ -8,12 +8,17 @@ const DiscussionsFeed = () => {
   const { groupId } = useParams();
   const groupIdAsNumber = React.useMemo(() => Number(groupId), [groupId]);
   const groupName = React.useMemo(
-    () => Object.keys(GROUP_ID_MAP).find((s) => GROUP_ID_MAP[s as GROUP_ID_MAP_TYPE] === groupIdAsNumber)!,
+    () =>
+      Object.keys(GROUP_ID_MAP).find(
+        (s) => GROUP_ID_MAP[s as GROUP_ID_MAP_TYPE] === groupIdAsNumber
+      )!,
     [groupIdAsNumber]
   );
 
   const [discussions, setDiscussions] = useState<Groups[]>([]);
-  const cached_fetch_discussions = React.useCallback(fetch_discussions, [groupId]);
+  const cached_fetch_discussions = React.useCallback(fetch_discussions, [
+    groupId,
+  ]);
   function fetch_discussions() {
     fetch(`/discussions/discussions/byGroupId/${groupId}`, {
       method: "GET",
@@ -58,16 +63,22 @@ const DiscussionsFeed = () => {
   }>({});
 
   function fetchDiscussionPosts(discussionId: number) {
-    fetch(`/discussions_posts/discussions_posts/byDiscussionId/${discussionId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Auth-Token": localStorage.getItem("token"),
-      } as any,
-    })
+    fetch(
+      `/discussions_posts/discussions_posts/byDiscussionId/${discussionId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Auth-Token": localStorage.getItem("token"),
+        } as any,
+      }
+    )
       .then((response) => response.json())
       .then((posts) => {
-        console.log("Fetched posts for discussion ID " + discussionId + ":", posts);
+        console.log(
+          "Fetched posts for discussion ID " + discussionId + ":",
+          posts
+        );
         setDiscussionPosts((prevPosts) => ({
           ...prevPosts,
           [discussionId]: posts,
@@ -84,7 +95,10 @@ const DiscussionsFeed = () => {
       <div className="p-6">
         <h2 className="text-xl font-bold mb-4">{groupName}</h2>
         <div className="mb-6">
-          <label htmlFor="topic_creator" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="topic_creator"
+            className="block text-sm font-medium text-gray-700"
+          >
             Téma:
           </label>
           <input
@@ -106,12 +120,20 @@ const DiscussionsFeed = () => {
       </div>
 
       {discussions.map((s) => (
-        <div key={s.discussion_id} className="mt-6 bg-white rounded-2xl shadow-xl">
+        <div
+          key={s.discussion_id}
+          className="mt-6 bg-white rounded-2xl shadow-xl"
+        >
           <div className="mt-4 p-4 bg-gray-100 rounded-lg">
             <p className="text-lg font-semibold">{s.topic}</p>
             <p className="text-sm text-gray-600">Autor diskuze: {s.username}</p>
             {discussionPosts[s.discussion_id]?.map((post, index) => (
-              <div key={post.post_id} className={`flex ${index % 2 === 1 ? "bg-grey rounded-md" : ""}`}>
+              <div
+                key={post.post_id}
+                className={`flex ${
+                  index % 2 === 1 ? "bg-grey rounded-md" : ""
+                }`}
+              >
                 <div className="w-3/4">
                   <p>{post.content}</p>
                 </div>

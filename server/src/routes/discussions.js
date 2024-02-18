@@ -23,7 +23,9 @@ router.post("/discussions", async (req, res) => {
 // Get all discussions
 router.get("/discussions", async (req, res) => {
   try {
-    const allDiscussions = await pool.query("SELECT * FROM discussions");
+    const allDiscussions = await pool.query(
+      "SELECT discussions.*, users.username FROM discussions JOIN users ON discussions.author_id = users.id"
+    );
     res.json(allDiscussions.rows);
   } catch (err) {
     console.error(err.message);

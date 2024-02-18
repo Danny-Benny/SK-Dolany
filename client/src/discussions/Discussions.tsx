@@ -16,6 +16,7 @@ interface DiscussionPost {
   post_id: number;
   username: string;
   content: string;
+  discussion_id: number;
 }
 
 const Discussions = () => {
@@ -24,9 +25,7 @@ const Discussions = () => {
   const { groupId } = useParams<string>();
   const [loading, setLoading] = useState(true);
   const [discussions, setDiscussions] = useState<Group[]>([]);
-  const [discussionPosts, setDiscussionPosts] = useState<{
-    [key: number]: DiscussionPost[];
-  }>({});
+  const [discussionPosts, setDiscussionPosts] = useState<DiscussionPost[]>([]);
   const [newTopic, setNewTopic] = useState<string>("");
 
   // Fetch discussions
@@ -42,27 +41,6 @@ const Discussions = () => {
     if (response.ok) {
       const data = await response.json();
       setDiscussions(data);
-    }
-  };
-  //fetch discussion posts by discussion id
-  const fetchDiscussionPosts = async (discussionId: number) => {
-    const response = await fetch(
-      `/discussions_posts/discussions_posts/byDiscussionId/${discussionId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Auth-Token": localStorage.getItem("token"),
-        } as any,
-      }
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      setDiscussionPosts((prev) => ({
-        ...prev,
-        [discussionId]: data,
-      }));
     }
   };
 
@@ -81,6 +59,25 @@ const Discussions = () => {
 
     checkAuthAndRedirect();
   }, [isAuthenticated, navigate, groupId]);
+
+  // Fetch discussion posts
+  const fetchDiscussionPosts = async () => {
+    const response = await fetch(`/discussions_posts/discussions_posts/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Auth-Token": localStorage.getItem("token"),
+      } as any,
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setDiscussionPosts(data);
+    }
+  };
+  useEffect(() => {
+    fetchDiscussionPosts();
+  }, []);
 
   // Save a new topic
   const saveNewTopic = async () => {
@@ -101,7 +98,6 @@ const Discussions = () => {
     }
   };
 
-  // Loading state
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -112,13 +108,12 @@ const Discussions = () => {
 
   return (
     <div className="flex flex-col items-center justify-center pt-4">
-      {/* New topic form */}
       <div className="mt-6">
         <label
           htmlFor="topic_creator"
           className="block text-sm font-medium text-gray-700"
         >
-          Topic:
+          Téma diskuze:
         </label>
         <input
           id="topic_creator"
@@ -132,11 +127,9 @@ const Discussions = () => {
           onClick={saveNewTopic}
           className="mt-2 font-bold py-2 px-3 rounded-md bg-mygreen text-white hover:bg-mygreen2 transition duration-300"
         >
-          Submit
+          Odeslat
         </button>
       </div>
-
-      {/* Discussions and new topic form */}
 
       {discussions.map((discussion) => (
         <div
@@ -145,12 +138,25 @@ const Discussions = () => {
           onClick={() => navigate(`/discussions/${discussion.discussion_id}`)}
           style={{ cursor: "pointer" }}
         >
-          {/* Discussion topic */}
           <div className="mt-4 p-4 bg-gray-100 rounded-lg">
             <p className="text-lg font-semibold">{discussion.topic}</p>
             <p className="text-sm text-gray-600">
               Author: {discussion.username}
             </p>
+            {/*last discussions post in discussions*/}
+            {discussionPosts
+              .filter((post) => post.discussion_id === discussion.discussion_id)
+              .slice(-1)
+              .map((post) => (
+                <div
+                  key={post.post_id}
+                  className="mt-2 bg-white rounded-lg p-2"
+                >
+                  <p className="text-base">
+                    Poslední příspěvek: {post.content}
+                  </p>
+                </div>
+              ))}
           </div>
         </div>
       ))}

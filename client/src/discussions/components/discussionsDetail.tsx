@@ -81,7 +81,7 @@ const DiscussionDetail = () => {
               <p>{post.content}</p>
             </div>
             <div className="w-1/4">
-              <p className="text-right">User: {post.username}</p>
+              <p className="text-right">Autor: {post.username}</p>
             </div>
           </div>
         ))}
