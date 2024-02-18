@@ -102,7 +102,7 @@ const Home = () => {
           Novinky
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4">
-          {news.map((item) => (
+          {[...news].reverse().map((item) => (
             <div key={item.id}>
               <News
                 id={item.id}
@@ -131,7 +131,7 @@ const Home = () => {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 className="p-2 border rounded w-full"
-                style={{ minHeight: "100px" }} // Adjust height as necessary
+                style={{ minHeight: "100px" }}
               />
             </div>
 

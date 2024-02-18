@@ -131,7 +131,7 @@ const Discussions = () => {
         </button>
       </div>
 
-      {discussions.map((discussion) => (
+      {[...discussions].reverse().map((discussion) => (
         <div
           key={discussion.discussion_id}
           className="mt-6 bg-white rounded-2xl shadow-xl w-64"
