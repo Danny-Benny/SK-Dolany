@@ -6,6 +6,7 @@ import Sponsors from "./components/sponsors";
 import News from "./components/news";
 import { useAuth } from "../components/auth/AuthContext";
 import { NewsProps } from "./components/types";
+import Contact from "./components/contact";
 
 const Home = () => {
   const [title, setTitle] = useState("");
@@ -147,6 +148,9 @@ const Home = () => {
           </div>
         </>
       )}
+      <div>
+        <Contact />
+      </div>
       <div className="pt-6 pb-6">
         <Sponsors />
       </div>
