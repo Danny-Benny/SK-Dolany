@@ -6,12 +6,12 @@ const jwt = require("jsonwebtoken");
 // Create a discussion
 router.post("/discussions", async (req, res) => {
   try {
-    const { topic } = req.body;
+    const { topic, role } = req.body;
     // const author_id = req.user.id;
     const author_id = jwt.verify(req.headers["x-auth-token"], "abc").id;
     const newDiscussion = await pool.query(
-      "INSERT INTO discussions (author_id, topic) VALUES($1, $2 ) RETURNING *",
-      [author_id, topic]
+      "INSERT INTO discussions (author_id, topic, role) VALUES($1, $2, $3 ) RETURNING *",
+      [author_id, topic, role]
     );
     res.json(newDiscussion.rows[0]);
   } catch (err) {

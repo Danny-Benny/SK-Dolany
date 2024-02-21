@@ -1,3 +1,9 @@
+create sequence news_news_id_seq
+    as integer;
+
+create sequence roster_player_id_seq
+    as integer;
+
 create table users
 (
     id          serial
@@ -12,9 +18,6 @@ create table users
     reset_token varchar(255)
 );
 
-alter table users
-    owner to postgres;
-
 create table news
 (
     id         integer   default nextval('news_news_id_seq'::regclass) not null
@@ -27,8 +30,7 @@ create table news
             references users
 );
 
-alter table news
-    owner to postgres;
+alter sequence news_news_id_seq owned by news.id;
 
 create table roster
 (
@@ -40,8 +42,7 @@ create table roster
     player_photo_url text
 );
 
-alter table roster
-    owner to postgres;
+alter sequence roster_player_id_seq owned by roster.id;
 
 create table season_links
 (
@@ -51,18 +52,12 @@ create table season_links
     link_url    text
 );
 
-alter table season_links
-    owner to postgres;
-
 create table sponsors
 (
     id               serial
         primary key,
     company_logo_url text
 );
-
-alter table sponsors
-    owner to postgres;
 
 create table photos
 (
@@ -75,9 +70,6 @@ create table photos
         references users
 );
 
-alter table photos
-    owner to postgres;
-
 create table groups
 (
     group_id   serial
@@ -85,22 +77,14 @@ create table groups
     group_name varchar(255) not null
 );
 
-alter table groups
-    owner to postgres;
-
 create table discussions
 (
     discussion_id serial
         primary key,
-    group_id      integer      not null
-        references groups
-            on delete cascade,
     author_id     integer      not null,
-    topic         varchar(255) not null
+    topic         varchar(255) not null,
+    role          varchar
 );
-
-alter table discussions
-    owner to postgres;
 
 create table discussion_posts
 (
@@ -113,7 +97,4 @@ create table discussion_posts
     content       text    not null,
     post_date     timestamp default CURRENT_TIMESTAMP
 );
-
-alter table discussion_posts
-    owner to postgres;
 

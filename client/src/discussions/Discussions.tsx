@@ -27,6 +27,8 @@ const Discussions = () => {
   const [discussions, setDiscussions] = useState<Group[]>([]);
   const [discussionPosts, setDiscussionPosts] = useState<DiscussionPost[]>([]);
   const [newTopic, setNewTopic] = useState<string>("");
+  const [selectedRole, setSelectedRole] = useState<string>("public");
+  const [filterRole, setFilterRole] = useState<string>("all");
 
   // Fetch discussions
   const fetchDiscussions = async () => {
@@ -40,9 +42,37 @@ const Discussions = () => {
 
     if (response.ok) {
       const data = await response.json();
-      setDiscussions(data);
+      const userRole = localStorage.getItem("userRole");
+
+      const roleHierarchy: { [key: string]: string[] } = {
+        public: ["public"],
+        citizen: ["public", "citizen"],
+        player: ["public", "citizen", "player"],
+        management: ["public", "citizen", "player", "management"],
+      };
+
+      const allowedRoles = userRole
+        ? roleHierarchy[userRole]
+        : roleHierarchy["public"];
+
+      const filteredDiscussions = data.filter(
+        (discussion: { role: string }) => {
+          if (filterRole === "all") {
+            return allowedRoles.includes(discussion.role);
+          }
+          return (
+            discussion.role === filterRole && allowedRoles.includes(filterRole)
+          );
+        }
+      );
+
+      setDiscussions(filteredDiscussions);
     }
   };
+
+  useEffect(() => {
+    fetchDiscussions();
+  }, [filterRole]);
 
   // Check authentication and redirect
   useEffect(() => {
@@ -89,12 +119,14 @@ const Discussions = () => {
       } as any,
       body: JSON.stringify({
         topic: newTopic,
+        role: selectedRole,
       }),
     });
 
     if (response.ok) {
       await fetchDiscussions();
       setNewTopic("");
+      setSelectedRole("public");
     }
   };
 
@@ -123,6 +155,23 @@ const Discussions = () => {
           onChange={(e) => setNewTopic(e.target.value)}
           className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
         />
+        <label
+          htmlFor="role_selector"
+          className="block text-sm font-medium text-gray-700 mt-2"
+        >
+          Vyberte roli:
+        </label>
+        <select
+          id="role_selector"
+          value={selectedRole}
+          onChange={(e) => setSelectedRole(e.target.value)}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+        >
+          <option value="public">Veřejnost</option>
+          <option value="citizen">Občané Dolan</option>
+          <option value="player">Hráči SK</option>
+          <option value="management">Management</option>
+        </select>
         <button
           onClick={saveNewTopic}
           className="mt-2 font-bold py-2 px-3 rounded-md bg-mygreen text-white hover:bg-mygreen2 transition duration-300"
@@ -130,7 +179,26 @@ const Discussions = () => {
           Odeslat
         </button>
       </div>
-
+      <div>
+        <label
+          htmlFor="filter_selector"
+          className="block text-sm font-medium text-gray-700 mt-2"
+        >
+          Filtruj podle role:
+        </label>
+        <select
+          id="filter_selector"
+          value={filterRole}
+          onChange={(e) => setFilterRole(e.target.value)}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+        >
+          <option value="all">Všechny diskuze</option>
+          <option value="public">Veřejnost</option>
+          <option value="citizen">Občané SK</option>
+          <option value="player">Hráči SK</option>
+          <option value="management">Management</option>
+        </select>
+      </div>
       {[...discussions].reverse().map((discussion) => (
         <div
           key={discussion.discussion_id}
@@ -143,7 +211,6 @@ const Discussions = () => {
             <p className="text-sm text-gray-600">
               Author: {discussion.username}
             </p>
-            {/*last discussions post in discussions*/}
             {discussionPosts
               .filter((post) => post.discussion_id === discussion.discussion_id)
               .slice(-1)
