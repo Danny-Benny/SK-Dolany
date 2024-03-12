@@ -3,8 +3,9 @@ const passport = require("../utils/passport");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 const { createUser } = require("../models/User");
-const secretKey = "abc";
+const secretKey = process.env.JWT_SECRET;
 
+// admina by jsi měl vytvářet nějak speciálně pouze TY
 router.post("/register", async (req, res) => {
   try {
     const { username, password, name, surname, email, role } = req.body;

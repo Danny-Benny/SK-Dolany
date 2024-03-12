@@ -8,7 +8,10 @@ router.post("/discussions_posts", async (req, res) => {
   try {
     const { content } = req.body;
     console.log(req.body);
-    const author_id = jwt.verify(req.headers["x-auth-token"], "abc").id;
+    const author_id = jwt.verify(
+      req.headers["x-auth-token"],
+      process.env.JWT_SECRET
+    ).id;
     const newDisscussionPost = await pool.query(
       "INSERT INTO discussion_posts (discussion_id, author_id, content) VALUES($1, $2, $3) RETURNING *",
       [req.body.discussion_id, author_id, content]

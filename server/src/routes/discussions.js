@@ -8,7 +8,10 @@ router.post("/discussions", async (req, res) => {
   try {
     const { topic, role } = req.body;
     // const author_id = req.user.id;
-    const author_id = jwt.verify(req.headers["x-auth-token"], "abc").id;
+    const author_id = jwt.verify(
+      req.headers["x-auth-token"],
+      process.env.JWT_SECRET
+    ).id;
     const newDiscussion = await pool.query(
       "INSERT INTO discussions (author_id, topic, role) VALUES($1, $2, $3 ) RETURNING *",
       [author_id, topic, role]
@@ -38,7 +41,7 @@ router.get("/discussions/byDiscussionId/:discussionId", async (req, res) => {
   try {
     const { discussionId } = req.params;
     const discussion = await pool.query(
-      "SELECT * FROM discussions WHERE discussion_id = $1",
+      "SELECT discussions.*, users.username FROM discussions JOIN users ON discussions.author_id = users.id WHERE discussion_id = $1",
       [discussionId]
     );
     res.json(discussion.rows[0]);
@@ -68,7 +71,7 @@ router.get("/discussions/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const discussion = await pool.query(
-      "SELECT * FROM discussions WHERE discussion_id = $1",
+      "SELECT discussions.*, users.username FROM discussions JOIN users ON discussions.author_id = users.id WHERE discussion_id = $1",
       [id]
     );
     res.json(discussion.rows[0]);

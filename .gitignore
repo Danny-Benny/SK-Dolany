@@ -25,3 +25,5 @@ yarn-error.log*
 ./server/db.js
 
 db-container-data/
+
+server/.env

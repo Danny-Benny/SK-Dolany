@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const app = express();
 const cors = require("cors");
 const passport = require("passport");
@@ -7,12 +8,14 @@ const path = require("path");
 //middleware
 app.use(cors());
 app.use(passport.initialize());
-app.use(express.json()); //req.body
+app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "../../client/build")));
 
 //ROUTES//
 app.use("/auth", require("./routes/auth"));
+
+//dodelat checkovani jwt
 app.use("/protected", require("./routes/protected"));
 app.use("/news", require("./routes/news"));
 app.use("/roster", require("./routes/roster"));

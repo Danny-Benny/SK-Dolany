@@ -8,7 +8,8 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: "abc",
+      // console.log(require("crypto").randomBytes(64).toString("hex"));
+      secretOrKey: process.env.JWT_SECRET,
     },
     async (jwtPayload, done) => {
       try {

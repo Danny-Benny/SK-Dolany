@@ -4,7 +4,7 @@ create sequence news_news_id_seq
 create sequence roster_player_id_seq
     as integer;
 
-create table users
+create table if not exists users
 (
     id          serial
         primary key,
@@ -18,7 +18,7 @@ create table users
     reset_token varchar(255)
 );
 
-create table news
+create table if not exists news
 (
     id         integer   default nextval('news_news_id_seq'::regclass) not null
         primary key,
@@ -32,7 +32,7 @@ create table news
 
 alter sequence news_news_id_seq owned by news.id;
 
-create table roster
+create table if not exists roster
 (
     id               integer default nextval('roster_player_id_seq'::regclass) not null
         primary key,
@@ -44,7 +44,7 @@ create table roster
 
 alter sequence roster_player_id_seq owned by roster.id;
 
-create table season_links
+create table if not exists season_links
 (
     id          serial
         primary key,
@@ -52,14 +52,14 @@ create table season_links
     link_url    text
 );
 
-create table sponsors
+create table if not exists sponsors
 (
     id               serial
         primary key,
     company_logo_url text
 );
 
-create table photos
+create table if not exists photos
 (
     id          serial
         primary key,
@@ -70,14 +70,14 @@ create table photos
         references users
 );
 
-create table groups
+create table if not exists groups
 (
     group_id   serial
         primary key,
     group_name varchar(255) not null
 );
 
-create table discussions
+create table if not exists discussions
 (
     discussion_id serial
         primary key,
@@ -86,7 +86,7 @@ create table discussions
     role          varchar
 );
 
-create table discussion_posts
+create table if not exists discussion_posts
 (
     post_id       serial
         primary key,
