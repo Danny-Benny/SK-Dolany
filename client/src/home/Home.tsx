@@ -47,7 +47,7 @@ const Home = () => {
     });
     if (response.ok) {
       const data = await response.json();
-      setNews(data.reverse()); // Reverse the order of news before setting it
+      setNews(data.reverse());
     } else {
       console.error("Failed to fetch news");
     }
