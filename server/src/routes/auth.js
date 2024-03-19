@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const { createUser } = require("../models/User");
 const secretKey = process.env.JWT_SECRET;
+const pool = require("../db");
 
-// admina by jsi měl vytvářet nějak speciálně pouze TY
 router.post("/register", async (req, res) => {
   try {
     const { username, password, name, surname, email, role } = req.body;
@@ -47,4 +47,25 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
+router.get("/users", async (req, res) => {
+  try {
+    const allUsers = await pool.query("SELECT * FROM users");
+    res.json(allUsers.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+router.post("/setRole", async (req, res) => {
+  try {
+    const { username, role } = req.body;
+    const user = await pool.query(
+      "UPDATE users SET role = $1 WHERE username = $2 RETURNING *",
+      [role, username]
+    );
+    res.json(user.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 module.exports = router;
