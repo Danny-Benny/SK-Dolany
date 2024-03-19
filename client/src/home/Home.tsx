@@ -29,7 +29,7 @@ const Home = () => {
     });
     if (response.ok) {
       const newNews = await response.json();
-      setNews([...news, newNews]);
+      setNews([newNews, ...news]);
       setTitle("");
       setContent("");
       console.log("News posted");
@@ -47,7 +47,7 @@ const Home = () => {
     });
     if (response.ok) {
       const data = await response.json();
-      setNews(data);
+      setNews(data.reverse()); // Reverse the order of news before setting it
     } else {
       console.error("Failed to fetch news");
     }
@@ -102,9 +102,9 @@ const Home = () => {
         <h2 className="text-center text-2xl text-mygreen font-bold mb-4">
           Novinky
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4">
-          {[...news].reverse().map((item) => (
-            <div key={item.id}>
+        <div className="flex flex-wrap justify-between px-4">
+          {news.slice(0, 9).map((item) => (
+            <div key={item.id} className="w-1/3 p-2">
               <News
                 id={item.id}
                 title={item.title}
