@@ -7,6 +7,8 @@ const Login = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [showModal, setShowModal] = useState(false);
 
@@ -35,9 +37,13 @@ const Login = () => {
           console.error("Token not found in the response");
         }
       } else {
+        setError(true);
+        setErrorMessage("Špatné heslo nebo uživatelské jméno.");
         console.error("Failed to login. Status:", response.status);
       }
     } catch (error) {
+      setError(true);
+      setErrorMessage("Nastala chyba při přihlašování.");
       console.error("Error logging in:", error);
     }
   };
@@ -52,15 +58,20 @@ const Login = () => {
             placeholder="Uživatelské jméno"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="p-2 border rounded w-full mb-2"
+            className={`p-2 border rounded w-full mb-2 ${
+              error ? "border-red" : ""
+            }`}
           />
           <input
             type="password"
             placeholder="Heslo"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="p-2 border rounded w-full mb-2"
+            className={`p-2 border rounded w-full mb-2 ${
+              error ? "border-red" : ""
+            }`}
           />
+          {error && <p className="text-red text-sm mb-2">{errorMessage}</p>}
           <div className="flex justify-between">
             <button
               onClick={() => navigate("/register")}
@@ -70,9 +81,11 @@ const Login = () => {
             </button>
             <div></div>
             <button onClick={() => setShowModal(true)} className="mt-2 px-3">
-              Zapomenute heslo?
+              Zapomenuté heslo?
             </button>
-            {showModal && <ForgotPasswordModal onClose={() => setShowModal(false)} />}
+            {showModal && (
+              <ForgotPasswordModal onClose={() => setShowModal(false)} />
+            )}
             <button
               onClick={handleLogin}
               className="mt-2 font-bold py-2 px-3 rounded-md bg-mygreen text-white hover:bg-mygreen2 transition duration-300"
