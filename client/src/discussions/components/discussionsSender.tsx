@@ -32,7 +32,10 @@ const DiscussionsSender = (props: Props) => {
   return (
     <>
       <div className="mt-6">
-        <label htmlFor="post_creator" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="post_creator"
+          className="block text-sm font-medium text-gray-700"
+        >
           Příspěvek:
         </label>
         <input

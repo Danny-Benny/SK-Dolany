@@ -80,11 +80,13 @@ const Login = () => {
               Ještě nemáte účet?
             </button>
             <div></div>
-            <button onClick={() => setShowModal(true)} className="mt-2 px-3">
-              Zapomenuté heslo?
-            </button>
-            {showModal && (
+
+            {showModal ? (
               <ForgotPasswordModal onClose={() => setShowModal(false)} />
+            ) : (
+              <button onClick={() => setShowModal(true)} className="mt-2 px-3">
+                Zapomenuté heslo?
+              </button>
             )}
             <button
               onClick={handleLogin}

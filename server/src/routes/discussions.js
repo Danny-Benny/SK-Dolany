@@ -7,7 +7,6 @@ const jwt = require("jsonwebtoken");
 router.post("/discussions", async (req, res) => {
   try {
     const { topic, role } = req.body;
-    // const author_id = req.user.id;
     const author_id = jwt.verify(
       req.headers["x-auth-token"],
       process.env.JWT_SECRET

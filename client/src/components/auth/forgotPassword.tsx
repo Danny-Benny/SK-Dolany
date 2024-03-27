@@ -33,17 +33,22 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
   return (
     <div className="modal">
       <div className="modal-content">
-        <span className="close" onClick={onClose}>
+        <span className="close cursor-pointer" onClick={onClose}>
           &times;
         </span>
-        <h2>Reset Password</h2>
+        <h2>Resetování hesla přes email</h2>
         <input
           type="email"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <button onClick={handleResetRequest}>Request Password Reset</button>
+        <button
+          onClick={handleResetRequest}
+          className="mt-2 font-bold py-2 px-3 rounded-md bg-mygreen text-white hover:bg-mygreen2 transition duration-300"
+        >
+          Požádat o změnu hesla
+        </button>
       </div>
     </div>
   );

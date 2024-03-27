@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../components/auth/AuthContext";
 import ClipLoader from "react-spinners/ClipLoader";
-import DiscussionsSender from "./components/discussionsSender";
 
 interface Group {
   username: string;

@@ -148,7 +148,7 @@ const Home = () => {
           </div>
         </>
       )}
-      <div className="w-max">
+      <div className="">
         <Contact />
       </div>
       <div className="pt-6 pb-6">

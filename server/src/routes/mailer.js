@@ -34,7 +34,7 @@ router.post("/requestResetPassword", async (req, res) => {
     from: "danielbenes04@gmail.com",
     to: user.email,
     subject: "Resetovaní hesla",
-    text: `Pro resetovaní hesla klikněte na tento odkaz: http://localhost:3000/reset-password?token=${resetToken}`,
+    text: `Pro resetovaní hesla klikněte na tento odkaz: http://localhost:3000/#/reset-password?token=${resetToken}`,
   };
 
   transporter.sendMail(mailOptions, function (err, info) {
