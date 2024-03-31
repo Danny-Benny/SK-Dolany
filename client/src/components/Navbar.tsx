@@ -27,15 +27,20 @@ export const Navbar = () => {
   return (
     <>
       <nav className="bg-mygreen py-3 px-6 md:px-12 flex justify-between items-center relative">
-        <Link to="/" className="text-white text-2xl font-bold">
+        <Link to="/" className="text-white text-2xl font-bold z-10">
           <img
             src="./assets/logo.png"
             alt=""
-            className="h-12"
-            style={{ maxHeight: "3rem" }}
+            className="h-20 md:h-32"
+            style={{
+              maxHeight: "6rem",
+              position: "absolute",
+              bottom: "-25px",
+            }}
           />
         </Link>
-        <ul className="hidden md:flex space-x-6 absolute right-12 top-0">
+
+        <ul className="hidden md:flex ">
           <li className="p-3">
             <a
               href="https://foto.obecdolany.cz:5443/#/shared_space/folder/55"
@@ -63,7 +68,7 @@ export const Navbar = () => {
           <li className="p-3">
             <button
               onClick={handleUserClick}
-              className="focus:outline-none text-white hover:text-gray-200 transition duration-300"
+              className="text-white focus:outline-none hover:text-gray-200 transition duration-300"
             >
               <FaUser size={"25px"} />
             </button>
