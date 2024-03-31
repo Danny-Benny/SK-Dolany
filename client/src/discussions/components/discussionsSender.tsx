@@ -4,8 +4,10 @@ interface Props {
   discussionId: number;
   refreshCallback: () => void;
 }
+
 const DiscussionsSender = (props: Props) => {
   const [newPost, setNewPost] = useState<string>("");
+
   async function saveNewPost(discussionId: number) {
     const response = await fetch("/discussions_posts/discussions_posts", {
       method: "POST",
@@ -43,9 +45,9 @@ const DiscussionsSender = (props: Props) => {
           name="post_creator"
           type="text"
           value={newPost}
-          style={{ width: "350px" }}
           onChange={(e) => setNewPost(e.target.value)}
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+          className="mt-1 block w-full sm:w-auto border border-gray-300 rounded-md shadow-sm p-2"
+          placeholder="Napište svůj příspěvek..."
         />
         <button
           onClick={async () => await saveNewPost(props.discussionId)}

@@ -55,6 +55,14 @@ const Home = () => {
 
   const isAdmin = () => isAuthenticated() && userRole === "management";
 
+  const CalendarContainer = () => {
+    return (
+      <div className="px-6 lg:px-0">
+        <Calendar />
+      </div>
+    );
+  };
+
   return (
     <div
       style={{
@@ -64,47 +72,44 @@ const Home = () => {
         alignItems: "center",
       }}
     >
-      <div
-        className="pt-6 pb-6 mt-6 bg-white rounded-2xl shadow-xl"
-        style={{ maxWidth: "1700px" }}
-      >
-        <div className="flex">
-          <div className="w-1/2 pl-6">
-            <AboutTeam
-              titleAbout={"Historie klubu SK Dolany"}
-              paragraphAbout={
-                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas aliquet accumsan leo. Curabitur bibendum justo non orci. Fusce wisi. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Praesent id justo in neque elementum ultrices. Phasellus et lorem id felis nonummy placerat. Etiam egestas wisi a erat. Donec vitae arcu. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. In convallis. Aenean id metus id velit ullamcorper pulvinar."
-              }
-            />
+      <div className="max-w-screen-xl mx-auto">
+        <div className="pt-6 pb-6 mt-6 bg-white rounded-2xl shadow-xl">
+          <div className="flex flex-col lg:flex-row">
+            <div className="w-full lg:w-1/2 pl-6 pr-6 lg:pr-0">
+              <AboutTeam
+                titleAbout={"Historie klubu SK Dolany"}
+                paragraphAbout={
+                  "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas aliquet accumsan leo. Curabitur bibendum justo non orci. Fusce wisi. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Praesent id justo in neque elementum ultrices. Phasellus et lorem id felis nonummy placerat. Etiam egestas wisi a erat. Donec vitae arcu. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. In convallis. Aenean id metus id velit ullamcorper pulvinar."
+                }
+              />
+            </div>
+            <div className="w-full lg:w-1/2 flex justify-center lg:justify-end pl-6 pr-6">
+              <AlonePicture image={"./assets/alone1.jpg"} />
+            </div>
           </div>
-          <div className="w-1/2 flex justify-end pr-6 pl-6">
-            <AlonePicture image={"./assets/alone1.jpg"} />
+        </div>
+
+        <div className="pt-6 pb-6 mt-6 bg-white rounded-2xl shadow-xl">
+          <div className="flex flex-col lg:flex-row">
+            <div className="w-full lg:w-1/2">
+              <div className="hidden lg:block pl-6 pr-6 lg:pr-0">
+                <AlonePicture image={"./assets/alone2.jpeg"} />
+              </div>
+            </div>
+            <div className="w-full lg:w-1/2 flex justify-center">
+              <CalendarContainer />
+            </div>
           </div>
         </div>
       </div>
-      <div
-        className="pt-6 pb-6 mt-6 bg-white rounded-2xl shadow-xl"
-        style={{ maxWidth: "1700px", width: "100%" }}
-      >
-        <div className="flex" style={{ justifyContent: "space-evenly" }}>
-          <div className="pl-6">
-            <AlonePicture image={"./assets/alone2.jpeg"} />
-          </div>
-          <div className="pr-6">
-            <Calendar />
-          </div>
-        </div>
-      </div>
-      <div
-        className="pt-6 pb-6 mt-6 bg-white shadow-xl rounded-2xl "
-        style={{ maxWidth: "1700px" }}
-      >
+
+      <div className="pt-6 pb-6 mt-6 bg-white shadow-xl rounded-2xl max-w-screen-xl mx-auto">
         <h2 className="text-center text-2xl text-mygreen font-bold mb-4">
           Novinky
         </h2>
         <div className="flex flex-wrap justify-between px-4">
           {news.slice(0, 9).map((item) => (
-            <div key={item.id} className="w-1/3 p-2">
+            <div key={item.id} className="w-full sm:w-1/2 md:w-1/3 p-2">
               <News
                 id={item.id}
                 title={item.title}

@@ -33,8 +33,8 @@ const Slideshow = ({ images, title1, title2 }: SlideshowProps) => {
         </div>
       ))}
       <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center z-10">
-        <h1 className="text-8xl text-white font-bold">{title1}</h1>
-        <h2 className="text-2xl text-white font-bold">{title2}</h2>
+        <h1 className="text-6xl text-white font-bold sm:text-8xl">{title1}</h1>
+        <h2 className="text-2xl text-white font-bold sm:text-4xl">{title2}</h2>
       </div>
       <FaArrowDown
         size={"35px"}

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Slideshow from "./slideshow";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaTimes } from "react-icons/fa";
 import { useAuth } from "./auth/AuthContext";
+
 const images = [
   "./assets/slideshow1.jpeg",
   "./assets/slideshow2.jpg",
@@ -13,6 +14,7 @@ export const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const auth = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleUserClick = () => {
     if (!auth.isAuthenticated()) {
@@ -24,35 +26,126 @@ export const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-mygreen relative pb-5 pt-5 w-full z-10">
-        <div className="flex justify-between items-center px-4">
-          <Link
-            to="/"
-            className="m-4 text-2xl font-bold text-white block top-0 absolute"
+      <nav className="bg-mygreen py-3 px-6 md:px-12 flex justify-between items-center relative">
+        <Link to="/" className="text-white text-2xl font-bold">
+          <img
+            src="./assets/logo.png"
+            alt=""
+            className="h-12"
+            style={{ maxHeight: "3rem" }}
+          />
+        </Link>
+        <ul className="hidden md:flex space-x-6 absolute right-12 top-0">
+          <li className="p-3">
+            <a
+              href="https://foto.obecdolany.cz:5443/#/shared_space/folder/55"
+              className="text-white hover:text-gray-200 transition duration-300"
+            >
+              Fotogalerie
+            </a>
+          </li>
+          <li className="p-3">
+            <a
+              href="https://www.fotbal.cz/souteze/turnaje/hlavni/baa61467-ec7d-4db7-8ec4-4266a14d5518"
+              className="text-white hover:text-gray-200 transition duration-300"
+            >
+              Ligové zápasy
+            </a>
+          </li>
+          <li className="p-3">
+            <Link
+              to="/discussions"
+              className="text-white hover:text-gray-200 transition duration-300"
+            >
+              Diskuze
+            </Link>
+          </li>
+          <li className="p-3">
+            <button
+              onClick={handleUserClick}
+              className="focus:outline-none text-white hover:text-gray-200 transition duration-300"
+            >
+              <FaUser size={"25px"} />
+            </button>
+          </li>
+        </ul>
+        <div className="md:hidden">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-white focus:outline-none"
           >
-            <img src="./assets/logo.png" alt="" className="relative -mt-4" />
-          </Link>
-          <ul className="flex ml-auto items-center -mr-4 text-white">
-            <li className="p-2">
-              <a href="https://foto.obecdolany.cz:5443/#/shared_space/folder/55">
-                Fotogalerie
-              </a>
-            </li>
-            <li className="p-2">
-              <a href="https://www.fotbal.cz/souteze/turnaje/hlavni/baa61467-ec7d-4db7-8ec4-4266a14d5518">
-                Ligové zápasy
-              </a>
-            </li>
-            <li className="p-2">
-              <Link to="/discussions">Diskuze</Link>
-            </li>
-            <li className="p-2 flex items-center">
-              <button onClick={handleUserClick}>
-                <FaUser size={"25px"} />
-              </button>
-            </li>
-          </ul>
+            <svg
+              className="w-6 h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {menuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
         </div>
+        <ul
+          className={`${
+            menuOpen ? "translate-y-0" : "-translate-y-full"
+          } md:hidden absolute top-0 right-0 flex flex-col items-end bg-mygreen rounded-l-3xl text-white z-10 w-56 p-6 transition-transform duration-300`}
+          style={{ zIndex: 100 }}
+        >
+          <li className="p-3">
+            <a
+              href="https://foto.obecdolany.cz:5443/#/shared_space/folder/55"
+              className="hover:text-gray-200 transition duration-300"
+            >
+              Fotogalerie
+            </a>
+          </li>
+          <li className="p-3">
+            <a
+              href="https://www.fotbal.cz/souteze/turnaje/hlavni/baa61467-ec7d-4db7-8ec4-4266a14d5518"
+              className="hover:text-gray-200 transition duration-300"
+            >
+              Ligové zápasy
+            </a>
+          </li>
+          <li className="p-3">
+            <Link
+              to="/discussions"
+              className="hover:text-gray-200 transition duration-300"
+            >
+              Diskuze
+            </Link>
+          </li>
+          <li className="p-3">
+            <button
+              onClick={handleUserClick}
+              className="focus:outline-none hover:text-gray-200 transition duration-300"
+            >
+              <FaUser size={"25px"} />
+            </button>
+          </li>
+          <li className="mt-auto">
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="focus:outline-none"
+            >
+              <FaTimes size={24} className="text-white" />
+            </button>
+          </li>
+        </ul>
       </nav>
       {location.pathname === "/" && (
         <Slideshow images={images} title1="SK Dolany" title2="fotbalový tým" />

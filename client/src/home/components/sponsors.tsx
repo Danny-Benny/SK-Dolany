@@ -19,7 +19,6 @@ const sponsorImages: SponsorImage[] = [
 ];
 
 const Sponsors: React.FC = () => {
-  // Quadruple the images for a seamless loop
   const quadrupledImages = [
     ...sponsorImages,
     ...sponsorImages,
@@ -28,15 +27,17 @@ const Sponsors: React.FC = () => {
   ];
 
   return (
-    <div className="overflow-hidden relative rounded-xl shadow-xl">
-      <div className="animate-slide">
-        {quadrupledImages.map(({ src, link }, index) => (
-          <div key={index} className="sponsor-image-container">
-            <a href={link} target="_blank" rel="noopener noreferrer">
-              <img src={src} alt={`Sponsor ${index}`} />
-            </a>
-          </div>
-        ))}
+    <div className="overflow-hidden relative rounded-xl shadow-xl max-w-screen-xl mx-auto">
+      <div className="animate-slide-container">
+        <div className="animate-slide">
+          {quadrupledImages.map(({ src, link }, index) => (
+            <div key={index} className="sponsor-image-container">
+              <a href={link} target="_blank" rel="noopener noreferrer">
+                <img src={src} alt={`Sponsor ${index}`} />
+              </a>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

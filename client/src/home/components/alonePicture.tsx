@@ -7,7 +7,7 @@ const AlonePicture = (props: AlonePictureProps) => {
       <img
         src={props.image}
         alt=""
-        className="rounded-2xl shadow-xl w-auto h-96"
+        className="rounded-2xl shadow-xl w-full lg:w-auto h-auto lg:h-96 object-cover mt-4 lg:mt-0"
       />
     </a>
   );

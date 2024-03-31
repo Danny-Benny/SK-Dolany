@@ -11,7 +11,7 @@ const News = (props: NewsProps) => {
   };
 
   return (
-    <div className="shadow-xl border-solid border-2 p-4 rounded-2xl border-grey mb-3 w-96">
+    <div className="shadow-xl border-solid border-2 p-4 rounded-2xl border-grey mb-3 ">
       <h2 className="font-semibold text-2xl text-gray-800 text-center">
         {props.title}
       </h2>

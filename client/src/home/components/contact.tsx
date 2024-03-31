@@ -1,10 +1,10 @@
 const Contact = () => {
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-6 my-6 w-max">
+    <div className="bg-white rounded-2xl shadow-xl p-6 my-6 max-w-screen-xl mx-auto">
       <h1 className="text-2xl font-bold text-mygreen mb-4">Kontakt</h1>
 
       <div className="flex flex-col md:flex-row justify-between">
-        <div>
+        <div className="mb-6 md:mb-0">
           <p>
             <strong>SK Dolany, z.s.</strong>
           </p>
